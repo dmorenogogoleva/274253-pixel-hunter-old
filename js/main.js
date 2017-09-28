@@ -20,8 +20,6 @@ const isRightArrPressed = function (evt) {
 
 
 const isAltAndRightArrKeycode = function (evt) {
-  evt.preventDefault();
-
   let check = false;
 
   if (evt.keyCode === RIGHT_ARR_KEYCODE) {
