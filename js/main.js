@@ -1,69 +1,58 @@
-const ALT_KEYCODE = 18;
 const LEFT_ARR_KEYCODE = 37;
 const RIGHT_ARR_KEYCODE = 39;
 
-const isAltPressed = function (evt) {
-  let check = false;
-  if (evt.keyCode === ALT_KEYCODE) {
-    check = true;
-  }
-  return check;
-};
-
-const isRightArrPressed = function (evt) {
-  let check = false;
-  if (evt.keyCode === RIGHT_ARR_KEYCODE) {
-    check = true;
-  }
-  return check;
-};
-
-
-const isAltAndRightArrKeycode = function (evt) {
-  let check = false;
-
-  if (evt.keyCode === RIGHT_ARR_KEYCODE) {
-    check = true;
-    return evt.keyCode;
-  }
-
-  if (isAltPressed(evt) && check) {
-    console.log(`gocha`);
-  }
-};
-
-const isAltAndLeftArrKeycode = function (evt) {
-  return evt.keyCode === ALT_KEYCODE && LEFT_ARR_KEYCODE;
-};
-
 const central = document.querySelector(`.central`);
-const main = document.querySelector(`#main`);
-const greeting = document.querySelector(`#greeting`);
-const rules = document.querySelector(`#rules`);
-const game1 = document.querySelector(`#game-1`);
-const game2 = document.querySelector(`#game-2`);
-const game3 = document.querySelector(`#game-3`);
-const stats = document.querySelector(`#stats`);
+const templates = [`#main`, `#greeting`, `#rules`, `#game-1`, `#game-2`, `#game-3`, `#stats`];
+const innersTemplates = [`#main`, `#greeting-div`, `#rules-div`, `#game-1-div`, `#game-2-div`, `#game-3-div`, `#stats-div`];
 
-const templates = [main, greeting, rules, game1, game2, game3, stats];
+const isAltAndRightArrKeyCode = function (evt) {
+  if (evt.altKey) {
+    if (evt.keyCode === RIGHT_ARR_KEYCODE) {
+      return evt.keyCode;
+    }
+  }
+  return false;
+};
 
+const isAltAndLefrArrKeyCode = function (evt) {
+  if (evt.altKey) {
+    if (evt.keyCode === LEFT_ARR_KEYCODE) {
+      return evt.keyCode;
+    }
+  }
+  return false;
+};
 
-const showArrElement = function (arr, num) {
+const showNextElement = function (arr, innersArr, num) {
+  if (num >= 7) {
+    return;
+  }
 
-  const newScreen = arr[num].content.cloneNode(true);
-  central.removeChild(arr[num - 1]);
+  const newScreen = document.querySelector(`${arr[num]}`).content.cloneNode(true);
+  document.querySelector(`${innersArr[num - 1]}`).remove();
   central.appendChild(newScreen);
+};
 
-  return newScreen;
+const showPreviousElement = function (arr, innersArr, num) {
+  if (num <= 0) {
+    return;
+  }
+
+  const newScreen = document.querySelector(`${arr[num]}`).content.cloneNode(true);
+  document.querySelector(`${innersArr[num + 1]}`).remove();
+  central.appendChild(newScreen);
 };
 
 
 let i = 0;
 
 const documentClickHandler = function (evt) {
-  if (isAltAndRightArrKeycode(evt)) {
+  if (isAltAndRightArrKeyCode(evt)) {
     i++;
-    showArrElement(templates, i);
+    showNextElement(templates, innersTemplates, i);
+  } else if (isAltAndLefrArrKeyCode(evt)) {
+    i--;
+    showPreviousElement(templates, innersTemplates, i);
   }
   return i;
 };
