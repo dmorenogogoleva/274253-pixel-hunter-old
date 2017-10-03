@@ -31,20 +31,10 @@ const isAltAndLefrArrKeyCode = function (evt) {
   return false;
 };
 
-const showNextElement = function (arr, innersArr, num) {
+const showElement = function (arr, innersArr, num) {
 
-  let currentTemplate = document.querySelector(`.central`).firstChild.nextElementSibling
-  ;
-  const newScreen = document.querySelector(`${arr[num]}`).content.cloneNode(true);
-  currentTemplate.remove();
-  central.appendChild(newScreen);
-};
-
-const showPreviousElement = function (arr, innersArr, num) {
-
-  let currentTemplate = document.querySelector(`.central`).firstChild.nextElementSibling
-  ;
-  const newScreen = document.querySelector(`${arr[num]}`).content.cloneNode(true);
+  const currentTemplate = central.querySelector(`.central__content`);
+  const newScreen = document.querySelector(arr[num]).content.cloneNode(true);
   currentTemplate.remove();
   central.appendChild(newScreen);
 };
@@ -57,13 +47,13 @@ const documentClickHandler = function (evt) {
       return;
     }
     i++;
-    showNextElement(templates, innersTemplates, i);
+    showElement(templates, innersTemplates, i);
   } else if (isAltAndLefrArrKeyCode(evt)) {
     if (i <= 0) {
       return;
     }
     i--;
-    showPreviousElement(templates, innersTemplates, i);
+    showElement(templates, innersTemplates, i);
   }
 };
 
