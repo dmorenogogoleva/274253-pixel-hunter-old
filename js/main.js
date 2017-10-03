@@ -1,9 +1,17 @@
-const LEFT_ARR_KEYCODE = 37;
-const RIGHT_ARR_KEYCODE = 39;
-
 const central = document.querySelector(`.central`);
 const templates = [`#main`, `#greeting`, `#rules`, `#game-1`, `#game-2`, `#game-3`, `#stats`];
 const innersTemplates = [`#main`, `#greeting-div`, `#rules-div`, `#game-1-div`, `#game-2-div`, `#game-3-div`, `#stats-div`];
+
+const LEFT_ARR_KEYCODE = 37;
+const RIGHT_ARR_KEYCODE = 39;
+const FIRST_SCREEN_ELEMENT = templates[0];
+const NUMBER_OF_SCREEN_ELEMENTS = templates.length - 1;
+
+window.onload = function () {
+
+  const newScreen = document.querySelector(`${FIRST_SCREEN_ELEMENT}`).content.cloneNode(true);
+  central.appendChild(newScreen);
+};
 
 const isAltAndRightArrKeyCode = function (evt) {
   if (evt.altKey) {
@@ -24,38 +32,39 @@ const isAltAndLefrArrKeyCode = function (evt) {
 };
 
 const showNextElement = function (arr, innersArr, num) {
-  if (num >= 7) {
-    return;
-  }
 
+  let currentTemplate = document.querySelector(`.central`).firstChild.nextElementSibling
+  ;
   const newScreen = document.querySelector(`${arr[num]}`).content.cloneNode(true);
-  document.querySelector(`${innersArr[num - 1]}`).remove();
+  currentTemplate.remove();
   central.appendChild(newScreen);
 };
 
 const showPreviousElement = function (arr, innersArr, num) {
-  if (num <= 0) {
-    return;
-  }
 
+  let currentTemplate = document.querySelector(`.central`).firstChild.nextElementSibling
+  ;
   const newScreen = document.querySelector(`${arr[num]}`).content.cloneNode(true);
-  document.querySelector(`${innersArr[num + 1]}`).remove();
+  currentTemplate.remove();
   central.appendChild(newScreen);
 };
-
 
 let i = 0;
 
 const documentClickHandler = function (evt) {
   if (isAltAndRightArrKeyCode(evt)) {
+    if (i >= NUMBER_OF_SCREEN_ELEMENTS) {
+      return;
+    }
     i++;
     showNextElement(templates, innersTemplates, i);
   } else if (isAltAndLefrArrKeyCode(evt)) {
+    if (i <= 0) {
+      return;
+    }
     i--;
     showPreviousElement(templates, innersTemplates, i);
   }
-  return i;
 };
 
 document.addEventListener(`keydown`, documentClickHandler);
-
