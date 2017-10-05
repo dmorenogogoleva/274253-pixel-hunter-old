@@ -6,9 +6,11 @@
   position: relative;
   max-width: 1000px;
   margin: 0 auto;
+  margin-top: 20px;
 }
 
 .central__content {
   display: flex;
+  flex-direction: column;
   min-height: 740px;
 }
