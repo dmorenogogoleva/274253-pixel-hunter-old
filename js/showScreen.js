@@ -18,7 +18,6 @@ const showScreen = function (layout, showNextScreen) {
   };
   deleteEmptyDivs();
 
-
   if (typeof showNextScreen === `function`) {
     showNextScreen();
   }

@@ -59,6 +59,7 @@ const checkToGame1Screen = function () {
 
   rulesInput.addEventListener(`input`, rulesInputInputHandler);
   // потом наверное надо будет поменять событие на submit
+  // попробовала поменять на submit еще раз, форма не отправляется, страница перезагружается и всё(
   rulesButton.addEventListener(`click`, showGame1Screen);
 };
 

@@ -82,10 +82,10 @@ const checkToGame2Screen = function () {
   const gameContent = document.querySelector(`.game__content`);
 
   gameOptionFields.forEach(function (element) {
-    let count = 0;
     element.addEventListener(`click`, function () {
+      let count = 0;
       count = gameContent.querySelectorAll(`input[type=radio]:checked`).length;
-      if (count >= gameOptionFields.length) {
+      if (count === gameOptionFields.length) {
         showGame2Screen();
       }
     });
