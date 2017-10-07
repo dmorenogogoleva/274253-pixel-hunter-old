@@ -7,16 +7,17 @@ const showScreen = function (layout, showNextScreen) {
   newDiv.innerHTML = layout;
   central.appendChild(newDiv);
 
-  // const deleteEmptyDivs = (function () {
-  //   const divs = document.querySelectorAll(`div`);
+  const deleteEmptyDivs = function () {
+    const divs = central.querySelectorAll(`div`);
 
-  //   divs.forEach(function (div) {
-  //     if (div.innerHTML.length === 0) {
-  //       console.log(';h');
-  //       div.remove();
-  //     }
-  //   });
-  // })();
+    divs.forEach(function (div) {
+      if (div.innerHTML.length === 0) {
+        div.remove();
+      }
+    });
+  };
+  deleteEmptyDivs();
+
 
   if (typeof showNextScreen === `function`) {
     showNextScreen();

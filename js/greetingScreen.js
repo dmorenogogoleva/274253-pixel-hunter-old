@@ -1,8 +1,7 @@
 import showScreen from './showScreen';
 import showRulesScreen from './rulesScreen';
 
-const greetingLayout = `
-<div id="greeting-div" class="greeting central__content">
+const greetingLayout = `<div id="greeting-div" class="greeting central__content">
   <div class="greeting central--blur">
     <div class="greeting__logo"><img src="img/logo_big.png" width="201" height="89" alt="Pixel Hunter"></div>
     <h1 class="greeting__asterisk">*</h1>
