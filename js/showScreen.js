@@ -1,6 +1,6 @@
 const central = document.querySelector(`.central`);
 
-const showScreen = function (layout, cb) {
+const showScreen = function (layout, showNextScreen) {
   const currentDiv = central.querySelector(`.central__content`);
   currentDiv.remove();
   const newDiv = document.createElement(`div`);
@@ -18,9 +18,8 @@ const showScreen = function (layout, cb) {
   //   });
   // })();
 
-
-  if (typeof cb === `function`) {
-    cb();
+  if (typeof showNextScreen === `function`) {
+    showNextScreen();
   }
 };
 

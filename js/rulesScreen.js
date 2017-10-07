@@ -1,4 +1,8 @@
-const rulesLayout = `  <div id="rules-div" class="rules central__content">
+import showScreen from './showScreen';
+import showGame1Screen from './game1Screen';
+import checkToGreetingScreen from './checkToGreetingScreen';
+
+const rulesLayout = `<div id="rules-div" class="rules central__content">
     <header class="header">
       <div class="header__back">
         <button class="back">
@@ -35,4 +39,27 @@ const rulesLayout = `  <div id="rules-div" class="rules central__content">
     </footer>
   </div>`;
 
-export default rulesLayout;
+
+const showRulesScreen = function () {
+  showScreen(rulesLayout, checkToGame1Screen);
+};
+
+const checkToGame1Screen = function () {
+  checkToGreetingScreen();
+  const rulesInput = document.querySelector(`.rules__input`);
+  const rulesButton = document.querySelector(`.rules__button`);
+
+  const rulesInputInputHandler = function () {
+    if (rulesInput.value.length > 0) {
+      rulesButton.removeAttribute(`disabled`);
+    } else {
+      rulesButton.setAttribute(`disabled`, `disabled`);
+    }
+  };
+
+  rulesInput.addEventListener(`input`, rulesInputInputHandler);
+  // потом наверное надо будет поменять событие на submit
+  rulesButton.addEventListener(`click`, showGame1Screen);
+};
+
+export default showRulesScreen;

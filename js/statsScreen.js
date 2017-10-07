@@ -1,3 +1,6 @@
+import showScreen from './showScreen';
+import checkToGreetingScreen from './checkToGreetingScreen';
+
 const statsLayout = `<div id="stats-div" class="stats central__content">
     <header class="header">
       <div class="header__back">
@@ -119,4 +122,8 @@ const statsLayout = `<div id="stats-div" class="stats central__content">
   </div>
   </div>`;
 
-export default statsLayout;
+const showStatsScreen = function () {
+  showScreen(statsLayout, checkToGreetingScreen);
+};
+
+export default showStatsScreen;
