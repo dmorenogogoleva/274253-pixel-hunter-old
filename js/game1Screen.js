@@ -23,22 +23,22 @@ const game1Layout = `<div id="game-1-div" class="game-1 central__content">
         <div class="game__option">
           <img src="http://placehold.it/468x458" alt="Option 1" width="468" height="458">
           <label class="game__answer game__answer--photo">
-            <input name="question1" type="radio" value="photo">
+            <input name="question1" class="game__button" type="radio" value="photo">
             <span>Фото</span>
           </label>
           <label class="game__answer game__answer--paint">
-            <input name="question1" type="radio" value="paint">
+            <input name="question1" class="game__button" type="radio" value="paint">
             <span>Рисунок</span>
           </label>
         </div>
         <div class="game__option">
           <img src="http://placehold.it/468x458" alt="Option 2" width="468" height="458">
           <label class="game__answer  game__answer--photo">
-            <input name="question2" type="radio" value="photo">
+            <input name="question2" class="game__button" type="radio" value="photo">
             <span>Фото</span>
           </label>
           <label class="game__answer  game__answer--paint">
-            <input name="question2" type="radio" value="paint">
+            <input name="question2" class="game__button" type="radio" value="paint">
             <span>Рисунок</span>
           </label>
         </div>
@@ -77,22 +77,20 @@ const showGame1Screen = function () {
 
 const checkToGame2Screen = function () {
   checkToGreetingScreen();
-  const gameOptionFields = document.querySelectorAll(`.game__option`);
-  const haveFieldCheckedButton = (field) => field.querySelector(`input[type=radio]:checked`) ? true : false;
 
-  let check;
-  // не работает
+  const gameOptionFields = document.querySelectorAll(`.game__option`);
+  const gameContent = document.querySelector(`.game__content`);
+
   gameOptionFields.forEach(function (element) {
-    check = 0;
+    let count = 0;
     element.addEventListener(`click`, function () {
-      if (haveFieldCheckedButton(element)) {
-        check += 1;
-      }
-      if (check >= gameOptionFields.length) {
+      count = gameContent.querySelectorAll(`input[type=radio]:checked`).length;
+      if (count >= gameOptionFields.length) {
         showGame2Screen();
       }
     });
   });
+
 };
 
 export default showGame1Screen;
