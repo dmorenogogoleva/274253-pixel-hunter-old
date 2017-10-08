@@ -15,26 +15,16 @@ const greetingLayout = `<div id="greeting-div" class="greeting central__content"
     </div>
     <div class="greeting__continue"><span><img src="img/arrow_right.svg" width="64" height="64" alt="Next"></span></div>
   </div>
-  <footer class="footer">
-    <a href="https://htmlacademy.ru" class="social-link social-link--academy">HTML Academy</a>
-    <span class="footer__made-in">Сделано в <a href="https://htmlacademy.ru" class="footer__link">HTML Academy</a> &copy; 2016</span>
-    <div class="footer__social-links">
-      <a href="https://twitter.com/htmlacademy_ru" class="social-link  social-link--tw">Твиттер</a>
-      <a href="https://www.instagram.com/htmlacademy/" class="social-link  social-link--ins">Инстаграм</a>
-      <a href="https://www.facebook.com/htmlacademy" class="social-link  social-link--fb">Фэйсбук</a>
-      <a href="https://vk.com/htmlacademy" class="social-link  social-link--vk">Вконтакте</a>
-    </div>
-  </footer>
 </div>
 `;
-
-const showGreetingScreen = function () {
-  showScreen(greetingLayout, checkToRulesScreen);
-};
 
 const checkToRulesScreen = function () {
   const greetingContinue = document.querySelector(`.greeting__continue`);
   greetingContinue.addEventListener(`click`, showRulesScreen);
+};
+
+const showGreetingScreen = function () {
+  showScreen(greetingLayout, checkToRulesScreen);
 };
 
 export default showGreetingScreen;

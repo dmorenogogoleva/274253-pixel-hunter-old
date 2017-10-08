@@ -1,22 +1,30 @@
+import footerLayout from './footerLayout';
+
 const central = document.querySelector(`.central`);
 
-const showScreen = function (layout, showNextScreen) {
-  const currentDiv = central.querySelector(`.central__content`);
-  currentDiv.remove();
-  const newDiv = document.createElement(`div`);
-  newDiv.innerHTML = layout;
-  central.appendChild(newDiv);
+const showScreen = function (layout, showNextScreen, headerLayout) {
+  const currentFooter = central.querySelector(`.footer`);
+  const currentHeader = central.querySelector(`.header`);
 
-  const deleteEmptyDivs = function () {
-    const divs = central.querySelectorAll(`div`);
+  central.innerHTML = ``;
 
-    divs.forEach(function (div) {
-      if (div.innerHTML.length === 0) {
-        div.remove();
-      }
-    });
-  };
-  deleteEmptyDivs();
+  if (currentFooter !== null) {
+    currentFooter.remove();
+  }
+
+  if (currentHeader !== null) {
+    currentHeader.remove();
+  }
+
+  if (headerLayout !== undefined) {
+    const newDiv = document.createElement(`div`);
+    newDiv.innerHTML = `${headerLayout}${layout}${footerLayout}`;
+    central.appendChild(newDiv);
+  } else {
+    const newDiv = document.createElement(`div`);
+    newDiv.innerHTML = `${layout}${footerLayout}`;
+    central.appendChild(newDiv);
+  }
 
   if (typeof showNextScreen === `function`) {
     showNextScreen();
