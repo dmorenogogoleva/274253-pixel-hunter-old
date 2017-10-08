@@ -1,0 +1,14 @@
+var createElement = (function () {
+'use strict';
+
+const createElement = function (container, layout) {
+  const newDiv = document.createElement(`div`);
+  newDiv.innerHTML = layout;
+  container.appendChild(newDiv);
+};
+
+return createElement;
+
+}());
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY3JlYXRlRWxlbWVudC5qcyIsInNvdXJjZXMiOlsianMvY3JlYXRlRWxlbWVudC5qcyJdLCJzb3VyY2VzQ29udGVudCI6WyJjb25zdCBjcmVhdGVFbGVtZW50ID0gZnVuY3Rpb24gKGNvbnRhaW5lciwgbGF5b3V0KSB7XG4gIGNvbnN0IG5ld0RpdiA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoYGRpdmApO1xuICBuZXdEaXYuaW5uZXJIVE1MID0gbGF5b3V0O1xuICBjb250YWluZXIuYXBwZW5kQ2hpbGQobmV3RGl2KTtcbn1cblxuZXhwb3J0IGRlZmF1bHQgY3JlYXRlRWxlbWVudDtcbiJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7QUFBQSxNQUFNLGFBQWEsR0FBRyxVQUFVLFNBQVMsRUFBRSxNQUFNLEVBQUU7RUFDakQsTUFBTSxNQUFNLEdBQUcsUUFBUSxDQUFDLGFBQWEsQ0FBQyxDQUFDLEdBQUcsQ0FBQyxDQUFDLENBQUM7RUFDN0MsTUFBTSxDQUFDLFNBQVMsR0FBRyxNQUFNLENBQUM7RUFDMUIsU0FBUyxDQUFDLFdBQVcsQ0FBQyxNQUFNLENBQUMsQ0FBQztDQUMvQixDQUFBLEFBRUQsQUFBNkIsOzssOzsiLCJzb3VyY2VSb290IjoiL3NvdXJjZS8ifQ==
