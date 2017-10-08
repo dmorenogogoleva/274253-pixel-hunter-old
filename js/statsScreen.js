@@ -1,6 +1,6 @@
-import showScreen from './showScreen';
-import checkToGreetingScreen from './checkToGreetingScreen';
+import createElement from './createElement';
 import footerLayout from './footerLayout';
+import backToGreetingScreen from './backToGreetingScreen';
 
 const statsLayout = `<div id="stats-div" class="stats central__content">
     <header class="header">
@@ -114,8 +114,8 @@ const statsLayout = `<div id="stats-div" class="stats central__content">
   </div>
   ${footerLayout}`;
 
-const showStatsScreen = function () {
-  showScreen(statsLayout, checkToGreetingScreen);
-};
+const statsLayoutDom = createElement(statsLayout);
 
-export default showStatsScreen;
+backToGreetingScreen(statsLayoutDom);
+
+export default statsLayoutDom;

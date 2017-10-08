@@ -1,8 +1,9 @@
+import createElement from './createElement';
 import showScreen from './showScreen';
-import showStatsScreen from './statsScreen';
-import checkToGreetingScreen from './checkToGreetingScreen';
+import statsLayoutDom from './statsScreen';
 import headerLayout from './headerLayout';
 import footerLayout from './footerLayout';
+import backToGreetingScreen from './backToGreetingScreen';
 
 const game3Layout = `
 ${headerLayout}
@@ -38,17 +39,15 @@ ${headerLayout}
   </div>
   ${footerLayout}`;
 
-const showGame3Screen = function () {
-  showScreen(game3Layout, checkToStatsScreen);
-};
+const game3LayoutDom = createElement(game3Layout);
+const showStatsScreen = () => showScreen(statsLayoutDom);
 
-const checkToStatsScreen = function () {
-  checkToGreetingScreen();
-  const gameOptions = document.querySelectorAll(`.game__option`);
+const gameOptions = game3LayoutDom.querySelectorAll(`.game__option`);
 
-  gameOptions.forEach(function (btn) {
-    btn.addEventListener(`click`, showStatsScreen);
-  });
-};
+gameOptions.forEach(function (btn) {
+  btn.addEventListener(`click`, showStatsScreen);
+});
 
-export default showGame3Screen;
+backToGreetingScreen(game3LayoutDom);
+
+export default game3LayoutDom;

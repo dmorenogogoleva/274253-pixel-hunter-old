@@ -1,8 +1,9 @@
+import createElement from './createElement';
 import showScreen from './showScreen';
-import showGame2Screen from './game2Screen';
-import checkToGreetingScreen from './checkToGreetingScreen';
+import game2LayoutDom from './pickPhotoOrPaintingScreen';
 import headerLayout from './headerLayout';
 import footerLayout from './footerLayout';
+import backToGreetingScreen from './backToGreetingScreen';
 
 const game1Layout = `
 ${headerLayout}
@@ -51,26 +52,22 @@ ${headerLayout}
   </div>
   ${footerLayout}`;
 
-const showGame1Screen = function () {
-  showScreen(game1Layout, checkToGame2Screen);
-};
+const game1LayoutDom = createElement(game1Layout);
+const showGame2Screen = () => showScreen(game2LayoutDom);
 
-const checkToGame2Screen = function () {
-  checkToGreetingScreen();
+const gameOptionFields = game1LayoutDom.querySelectorAll(`.game__option`);
+const gameContent = game1LayoutDom.querySelector(`.game__content`);
 
-  const gameOptionFields = document.querySelectorAll(`.game__option`);
-  const gameContent = document.querySelector(`.game__content`);
-
-  gameOptionFields.forEach(function (element) {
-    element.addEventListener(`click`, function () {
-      let count = 0;
-      count = gameContent.querySelectorAll(`input[type=radio]:checked`).length;
-      if (count === gameOptionFields.length) {
-        showGame2Screen();
-      }
-    });
+gameOptionFields.forEach(function (element) {
+  element.addEventListener(`click`, function () {
+    let count = 0;
+    count = gameContent.querySelectorAll(`input[type=radio]:checked`).length;
+    if (count === gameOptionFields.length) {
+      showGame2Screen();
+    }
   });
+});
 
-};
+backToGreetingScreen(game1LayoutDom);
 
-export default showGame1Screen;
+export default game1LayoutDom;

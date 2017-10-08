@@ -7,6 +7,6 @@ const footerLayout = `<footer class="footer">
   <a href="https://www.facebook.com/htmlacademy" class="social-link  social-link--fb">Фэйсбук</a>
   <a href="https://vk.com/htmlacademy" class="social-link  social-link--vk">Вконтакте</a>
 </div>
-</footer>`
+</footer>`;
 
 export default footerLayout;

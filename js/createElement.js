@@ -1,7 +1,7 @@
-const createElement = function (container, layout) {
+const createElement = function (layout) {
   const newDiv = document.createElement(`div`);
   newDiv.innerHTML = layout;
-  container.appendChild(newDiv);
-}
+  return newDiv;
+};
 
 export default createElement;

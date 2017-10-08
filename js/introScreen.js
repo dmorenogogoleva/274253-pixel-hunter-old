@@ -1,6 +1,6 @@
-import showGreetingScreen from './greetingScreen';
-
-const central = document.querySelector(`.central`);
+import createElement from './createElement';
+import showScreen from './showScreen';
+import greetingLayoutDom from './greetingScreen';
 
 const introScreen = `<div id="main" class="central__content">
 <div id="intro" class="intro">
@@ -9,11 +9,12 @@ const introScreen = `<div id="main" class="central__content">
 </div>
 </div>`;
 
-window.onload = function () {
-  const div = document.createElement(`div`);
-  div.innerHTML = introScreen;
-  central.appendChild(div);
-  const asterisk = central.querySelector(`.intro__asterisk`);
+const introLayoutDom = createElement(introScreen);
+const showGreetingScreen = () => showScreen(greetingLayoutDom);
 
-  asterisk.addEventListener(`click`, showGreetingScreen);
+window.onload = function () {
+  showScreen(introLayoutDom);
 };
+
+const asterisk = introLayoutDom.querySelector(`.intro__asterisk`);
+asterisk.addEventListener(`click`, showGreetingScreen);

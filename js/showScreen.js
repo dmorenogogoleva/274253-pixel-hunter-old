@@ -1,15 +1,9 @@
-import createElement from './createElement';
-
 const central = document.querySelector(`.central`);
 
-const showScreen = function (layout, showNextScreen) {
+const showScreen = function (domElement) {
   central.innerHTML = ``;
 
-  createElement(central, layout);
-
-  if (typeof showNextScreen === `function`) {
-    showNextScreen();
-  }
+  central.appendChild(domElement);
 };
 
 export default showScreen;

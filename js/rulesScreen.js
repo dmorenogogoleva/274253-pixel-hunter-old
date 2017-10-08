@@ -1,7 +1,8 @@
+import createElement from './createElement';
 import showScreen from './showScreen';
-import showGame1Screen from './game1Screen';
-import checkToGreetingScreen from './checkToGreetingScreen';
+import game1LayoutDom from './pickPhotoOrPaintingFromTwoScreen';
 import footerLayout from './footerLayout';
+import backToGreetingScreen from './backToGreetingScreen';
 
 const rulesLayout = `<div id="rules-div" class="rules central__content">
     <header class="header">
@@ -31,28 +32,24 @@ const rulesLayout = `<div id="rules-div" class="rules central__content">
   </div>
   ${footerLayout}`;
 
+const rulesLayoutDom = createElement(rulesLayout);
+const showGame1Screen = () => showScreen(game1LayoutDom);
 
-const showRulesScreen = function () {
-  showScreen(rulesLayout, checkToGame1Screen);
+const rulesInput = rulesLayoutDom.querySelector(`.rules__input`);
+const rulesButton = rulesLayoutDom.querySelector(`.rules__button`);
+
+const rulesInputInputHandler = function () {
+  if (rulesInput.value.length > 0) {
+    rulesButton.removeAttribute(`disabled`);
+  } else {
+    rulesButton.setAttribute(`disabled`, `disabled`);
+  }
 };
 
-const checkToGame1Screen = function () {
-  checkToGreetingScreen();
-  const rulesInput = document.querySelector(`.rules__input`);
-  const rulesButton = document.querySelector(`.rules__button`);
+rulesInput.addEventListener(`input`, rulesInputInputHandler);
+// попробовала поменять на submit еще раз, форма не отправляется, страница перезагружается и всё(
+rulesButton.addEventListener(`click`, showGame1Screen);
 
-  const rulesInputInputHandler = function () {
-    if (rulesInput.value.length > 0) {
-      rulesButton.removeAttribute(`disabled`);
-    } else {
-      rulesButton.setAttribute(`disabled`, `disabled`);
-    }
-  };
+backToGreetingScreen(rulesLayoutDom);
 
-  rulesInput.addEventListener(`input`, rulesInputInputHandler);
-  // потом наверное надо будет поменять событие на submit
-  // попробовала поменять на submit еще раз, форма не отправляется, страница перезагружается и всё(
-  rulesButton.addEventListener(`click`, showGame1Screen);
-};
-
-export default showRulesScreen;
+export default rulesLayoutDom;

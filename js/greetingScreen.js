@@ -1,8 +1,7 @@
 import showScreen from './showScreen';
-import showRulesScreen from './rulesScreen';
 import footerLayout from './footerLayout';
 import createElement from './createElement';
-
+import rulesLayoutDom from './rulesScreen';
 
 const greetingLayout = `<div id="greeting-div" class="greeting central__content">
   <div class="greeting central--blur">
@@ -22,13 +21,9 @@ const greetingLayout = `<div id="greeting-div" class="greeting central__content"
 ${footerLayout}
 `;
 
-const checkToRulesScreen = function () {
-  const greetingContinue = document.querySelector(`.greeting__continue`);
-  greetingContinue.addEventListener(`click`, showRulesScreen);
-};
+const showRulesScreen = () => showScreen(rulesLayoutDom);
 
-const showGreetingScreen = function () {
-  showScreen(greetingLayout, checkToRulesScreen);
-};
-
-export default showGreetingScreen;
+const greetingLayoutDom = createElement(greetingLayout);
+const greetingContinue = greetingLayoutDom.querySelector(`.greeting__continue`);
+greetingContinue.addEventListener(`click`, showRulesScreen);
+export default greetingLayoutDom;
