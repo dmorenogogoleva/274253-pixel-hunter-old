@@ -1,5 +1,8 @@
 import showScreen from './showScreen';
 import showRulesScreen from './rulesScreen';
+import footerLayout from './footerLayout';
+import createElement from './createElement';
+
 
 const greetingLayout = `<div id="greeting-div" class="greeting central__content">
   <div class="greeting central--blur">
@@ -16,6 +19,7 @@ const greetingLayout = `<div id="greeting-div" class="greeting central__content"
     <div class="greeting__continue"><span><img src="img/arrow_right.svg" width="64" height="64" alt="Next"></span></div>
   </div>
 </div>
+${footerLayout}
 `;
 
 const checkToRulesScreen = function () {

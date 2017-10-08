@@ -1,6 +1,7 @@
 import showScreen from './showScreen';
 import showGame1Screen from './game1Screen';
 import checkToGreetingScreen from './checkToGreetingScreen';
+import footerLayout from './footerLayout';
 
 const rulesLayout = `<div id="rules-div" class="rules central__content">
     <header class="header">
@@ -27,7 +28,8 @@ const rulesLayout = `<div id="rules-div" class="rules central__content">
         <button class="rules__button  continue" type="submit" disabled>Go!</button>
       </form>
     </div>
-  </div>`;
+  </div>
+  ${footerLayout}`;
 
 
 const showRulesScreen = function () {

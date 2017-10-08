@@ -2,8 +2,11 @@ import showScreen from './showScreen';
 import showGame2Screen from './game2Screen';
 import checkToGreetingScreen from './checkToGreetingScreen';
 import headerLayout from './headerLayout';
+import footerLayout from './footerLayout';
 
-const game1Layout = `<div id="game-1-div" class="game-1 central__content">
+const game1Layout = `
+${headerLayout}
+<div id="game-1-div" class="game-1 central__content">
     <div class="game">
       <p class="game__task">Угадайте для каждого изображения фото или рисунок?</p>
       <form class="game__content">
@@ -45,10 +48,11 @@ const game1Layout = `<div id="game-1-div" class="game-1 central__content">
         </ul>
       </div>
     </div>
-  </div>`;
+  </div>
+  ${footerLayout}`;
 
 const showGame1Screen = function () {
-  showScreen(game1Layout, checkToGame2Screen, headerLayout);
+  showScreen(game1Layout, checkToGame2Screen);
 };
 
 const checkToGame2Screen = function () {

@@ -2,8 +2,11 @@ import showScreen from './showScreen';
 import showStatsScreen from './statsScreen';
 import checkToGreetingScreen from './checkToGreetingScreen';
 import headerLayout from './headerLayout';
+import footerLayout from './footerLayout';
 
-const game3Layout = `<div id="game-3-div" class="game-3 central__content">
+const game3Layout = `
+${headerLayout}
+<div id="game-3-div" class="game-3 central__content">
     <div class="game">
       <p class="game__task">Найдите рисунок среди изображений</p>
       <form class="game__content  game__content--triple">
@@ -32,10 +35,11 @@ const game3Layout = `<div id="game-3-div" class="game-3 central__content">
         </ul>
       </div>
     </div>
-  </div>`;
+  </div>
+  ${footerLayout}`;
 
 const showGame3Screen = function () {
-  showScreen(game3Layout, checkToStatsScreen, headerLayout);
+  showScreen(game3Layout, checkToStatsScreen);
 };
 
 const checkToStatsScreen = function () {

@@ -1,5 +1,6 @@
 import showScreen from './showScreen';
 import checkToGreetingScreen from './checkToGreetingScreen';
+import footerLayout from './footerLayout';
 
 const statsLayout = `<div id="stats-div" class="stats central__content">
     <header class="header">
@@ -110,7 +111,8 @@ const statsLayout = `<div id="stats-div" class="stats central__content">
         </tr>
       </table>
   </div>
-  </div>`;
+  </div>
+  ${footerLayout}`;
 
 const showStatsScreen = function () {
   showScreen(statsLayout, checkToGreetingScreen);
