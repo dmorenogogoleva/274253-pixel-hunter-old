@@ -1,11 +1,11 @@
 import createElement from './createElement';
 import showScreen from './showScreen';
-import game2LayoutDom from './pickPhotoOrPaintingScreen';
+import pickPhotoOrPaintingLayoutDom from './pickPhotoOrPaintingScreen';
 import headerLayout from './headerLayout';
 import footerLayout from './footerLayout';
 import backToGreetingScreen from './backToGreetingScreen';
 
-const game1Layout = `
+const pickPhotoOrPaintingFromTwoLayout = `
 ${headerLayout}
 <div id="game-1-div" class="game-1 central__content">
     <div class="game">
@@ -52,22 +52,22 @@ ${headerLayout}
   </div>
   ${footerLayout}`;
 
-const game1LayoutDom = createElement(game1Layout);
-const showGame2Screen = () => showScreen(game2LayoutDom);
+const pickPhotoOrPaintingFromTwoLayoutDom = createElement(pickPhotoOrPaintingFromTwoLayout);
+const showGPhotoOrPaintingScreen = () => showScreen(pickPhotoOrPaintingLayoutDom);
 
-const gameOptionFields = game1LayoutDom.querySelectorAll(`.game__option`);
-const gameContent = game1LayoutDom.querySelector(`.game__content`);
+const gameOptionFields = pickPhotoOrPaintingFromTwoLayoutDom.querySelectorAll(`.game__option`);
+const gameContent = pickPhotoOrPaintingFromTwoLayoutDom.querySelector(`.game__content`);
 
 gameOptionFields.forEach(function (element) {
   element.addEventListener(`click`, function () {
     let count = 0;
     count = gameContent.querySelectorAll(`input[type=radio]:checked`).length;
     if (count === gameOptionFields.length) {
-      showGame2Screen();
+      showGPhotoOrPaintingScreen();
     }
   });
 });
 
-backToGreetingScreen(game1LayoutDom);
+backToGreetingScreen(pickPhotoOrPaintingFromTwoLayoutDom);
 
-export default game1LayoutDom;
+export default pickPhotoOrPaintingFromTwoLayoutDom;

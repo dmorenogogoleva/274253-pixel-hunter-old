@@ -1,11 +1,11 @@
 import createElement from './createElement';
 import showScreen from './showScreen';
-import game3LayoutDom from './pickPaintingFromImagesScreen';
+import pickPaintingFromImagesLayoutDom from './pickPaintingFromImagesScreen';
 import headerLayout from './headerLayout';
 import footerLayout from './footerLayout';
 import backToGreetingScreen from './backToGreetingScreen';
 
-const game2Layout = `
+const pickPhotoOrPaintingLayout = `
 ${headerLayout}
 <div id="game-2-div" class="game-2 central__content">
   <div class="game">
@@ -41,15 +41,15 @@ ${headerLayout}
 </div>
   ${footerLayout}`;
 
-const game2LayoutDom = createElement(game2Layout);
-const showGame3Screen = () => showScreen(game3LayoutDom);
+const pickPhotoOrPaintingLayoutDom = createElement(pickPhotoOrPaintingLayout);
+const pickPaintingFromImagesScreen = () => showScreen(pickPaintingFromImagesLayoutDom);
 
-const gameAnswers = game2LayoutDom.querySelectorAll(`.game__answer`);
+const gameAnswers = pickPhotoOrPaintingLayoutDom.querySelectorAll(`.game__answer`);
 
 gameAnswers.forEach(function (btn) {
-  btn.addEventListener(`click`, showGame3Screen);
+  btn.addEventListener(`click`, pickPaintingFromImagesScreen);
 });
 
-backToGreetingScreen(game2LayoutDom);
+backToGreetingScreen(pickPhotoOrPaintingLayoutDom);
 
-export default game2LayoutDom;
+export default pickPhotoOrPaintingLayoutDom;

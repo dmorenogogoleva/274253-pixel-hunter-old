@@ -1,6 +1,6 @@
 import createElement from './createElement';
 import showScreen from './showScreen';
-import game1LayoutDom from './pickPhotoOrPaintingFromTwoScreen';
+import pickPhotoOrPaintingFromTwoLayoutDom from './pickPhotoOrPaintingFromTwoScreen';
 import footerLayout from './footerLayout';
 import backToGreetingScreen from './backToGreetingScreen';
 
@@ -33,7 +33,7 @@ const rulesLayout = `<div id="rules-div" class="rules central__content">
   ${footerLayout}`;
 
 const rulesLayoutDom = createElement(rulesLayout);
-const showGame1Screen = () => showScreen(game1LayoutDom);
+const showPhotoOrPaintingFromTwoScreen = () => showScreen(pickPhotoOrPaintingFromTwoLayoutDom);
 
 const rulesInput = rulesLayoutDom.querySelector(`.rules__input`);
 const rulesButton = rulesLayoutDom.querySelector(`.rules__button`);
@@ -48,7 +48,7 @@ const rulesInputInputHandler = function () {
 
 rulesInput.addEventListener(`input`, rulesInputInputHandler);
 // попробовала поменять на submit еще раз, форма не отправляется, страница перезагружается и всё(
-rulesButton.addEventListener(`click`, showGame1Screen);
+rulesButton.addEventListener(`click`, showPhotoOrPaintingFromTwoScreen);
 
 backToGreetingScreen(rulesLayoutDom);
 

@@ -12,9 +12,8 @@ const introScreen = `<div id="main" class="central__content">
 const introLayoutDom = createElement(introScreen);
 const showGreetingScreen = () => showScreen(greetingLayoutDom);
 
-window.onload = function () {
-  showScreen(introLayoutDom);
-};
-
 const asterisk = introLayoutDom.querySelector(`.intro__asterisk`);
 asterisk.addEventListener(`click`, showGreetingScreen);
+
+export default introLayoutDom;
+

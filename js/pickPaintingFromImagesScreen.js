@@ -5,7 +5,7 @@ import headerLayout from './headerLayout';
 import footerLayout from './footerLayout';
 import backToGreetingScreen from './backToGreetingScreen';
 
-const game3Layout = `
+const pickPaintingFromImagesLayout = `
 ${headerLayout}
 <div id="game-3-div" class="game-3 central__content">
     <div class="game">
@@ -39,15 +39,15 @@ ${headerLayout}
   </div>
   ${footerLayout}`;
 
-const game3LayoutDom = createElement(game3Layout);
+const pickPaintingFromImagesLayoutDom = createElement(pickPaintingFromImagesLayout);
 const showStatsScreen = () => showScreen(statsLayoutDom);
 
-const gameOptions = game3LayoutDom.querySelectorAll(`.game__option`);
+const gameOptions = pickPaintingFromImagesLayoutDom.querySelectorAll(`.game__option`);
 
 gameOptions.forEach(function (btn) {
   btn.addEventListener(`click`, showStatsScreen);
 });
 
-backToGreetingScreen(game3LayoutDom);
+backToGreetingScreen(pickPaintingFromImagesLayoutDom);
 
-export default game3LayoutDom;
+export default pickPaintingFromImagesLayoutDom;
