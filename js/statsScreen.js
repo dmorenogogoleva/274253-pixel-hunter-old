@@ -1,5 +1,6 @@
-import showScreen from './showScreen';
-import checkToGreetingScreen from './checkToGreetingScreen';
+import createElement from './createElement';
+import footerLayout from './footerLayout';
+import backToGreetingScreen from './backToGreetingScreen';
 
 const statsLayout = `<div id="stats-div" class="stats central__content">
     <header class="header">
@@ -109,21 +110,12 @@ const statsLayout = `<div id="stats-div" class="stats central__content">
           <td colspan="5" class="result__total  result__total--final">950</td>
         </tr>
       </table>
-    <footer class="footer">
-      <a href="https://htmlacademy.ru" class="social-link social-link--academy">HTML Academy</a>
-      <span class="footer__made-in">Сделано в <a href="https://htmlacademy.ru" class="footer__link">HTML Academy</a> &copy; 2016</span>
-      <div class="footer__social-links">
-        <a href="https://twitter.com/htmlacademy_ru" class="social-link  social-link--tw">Твиттер</a>
-        <a href="https://www.instagram.com/htmlacademy/" class="social-link  social-link--ins">Инстаграм</a>
-        <a href="https://www.facebook.com/htmlacademy" class="social-link  social-link--fb">Фэйсбук</a>
-        <a href="https://vk.com/htmlacademy" class="social-link  social-link--vk">Вконтакте</a>
-      </div>
-    </footer>
   </div>
-  </div>`;
+  </div>
+  ${footerLayout}`;
 
-const showStatsScreen = function () {
-  showScreen(statsLayout, checkToGreetingScreen);
-};
+const statsLayoutDom = createElement(statsLayout);
 
-export default showStatsScreen;
+backToGreetingScreen(statsLayoutDom);
+
+export default statsLayoutDom;

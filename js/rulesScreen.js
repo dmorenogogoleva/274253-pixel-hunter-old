@@ -1,6 +1,8 @@
+import createElement from './createElement';
 import showScreen from './showScreen';
-import showGame1Screen from './game1Screen';
-import checkToGreetingScreen from './checkToGreetingScreen';
+import pickPhotoOrPaintingFromTwoLayoutDom from './pickPhotoOrPaintingFromTwoScreen';
+import footerLayout from './footerLayout';
+import backToGreetingScreen from './backToGreetingScreen';
 
 const rulesLayout = `<div id="rules-div" class="rules central__content">
     <header class="header">
@@ -27,39 +29,27 @@ const rulesLayout = `<div id="rules-div" class="rules central__content">
         <button class="rules__button  continue" type="submit" disabled>Go!</button>
       </form>
     </div>
-    <footer class="footer">
-      <a href="https://htmlacademy.ru" class="social-link social-link--academy">HTML Academy</a>
-      <span class="footer__made-in">Сделано в <a href="https://htmlacademy.ru" class="footer__link">HTML Academy</a> &copy; 2016</span>
-      <div class="footer__social-links">
-        <a href="https://twitter.com/htmlacademy_ru" class="social-link  social-link--tw">Твиттер</a>
-        <a href="https://www.instagram.com/htmlacademy/" class="social-link  social-link--ins">Инстаграм</a>
-        <a href="https://www.facebook.com/htmlacademy" class="social-link  social-link--fb">Фэйсбук</a>
-        <a href="https://vk.com/htmlacademy" class="social-link  social-link--vk">Вконтакте</a>
-      </div>
-    </footer>
-  </div>`;
+  </div>
+  ${footerLayout}`;
 
+const rulesLayoutDom = createElement(rulesLayout);
+const showPhotoOrPaintingFromTwoScreen = () => showScreen(pickPhotoOrPaintingFromTwoLayoutDom);
 
-const showRulesScreen = function () {
-  showScreen(rulesLayout, checkToGame1Screen);
+const rulesInput = rulesLayoutDom.querySelector(`.rules__input`);
+const rulesButton = rulesLayoutDom.querySelector(`.rules__button`);
+
+const rulesInputInputHandler = function () {
+  if (rulesInput.value.length > 0) {
+    rulesButton.removeAttribute(`disabled`);
+  } else {
+    rulesButton.setAttribute(`disabled`, `disabled`);
+  }
 };
 
-const checkToGame1Screen = function () {
-  checkToGreetingScreen();
-  const rulesInput = document.querySelector(`.rules__input`);
-  const rulesButton = document.querySelector(`.rules__button`);
+rulesInput.addEventListener(`input`, rulesInputInputHandler);
+// попробовала поменять на submit еще раз, форма не отправляется, страница перезагружается и всё(
+rulesButton.addEventListener(`click`, showPhotoOrPaintingFromTwoScreen);
 
-  const rulesInputInputHandler = function () {
-    if (rulesInput.value.length > 0) {
-      rulesButton.removeAttribute(`disabled`);
-    } else {
-      rulesButton.setAttribute(`disabled`, `disabled`);
-    }
-  };
+backToGreetingScreen(rulesLayoutDom);
 
-  rulesInput.addEventListener(`input`, rulesInputInputHandler);
-  // потом наверное надо будет поменять событие на submit
-  rulesButton.addEventListener(`click`, showGame1Screen);
-};
-
-export default showRulesScreen;
+export default rulesLayoutDom;
