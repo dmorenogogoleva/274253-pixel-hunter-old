@@ -15,14 +15,14 @@ const rollup = require('gulp-better-rollup');
 const sourcemaps = require('gulp-sourcemaps');
 const mocha = require('gulp-mocha');
 
-gulp.task('test', function () {
-  return gulp
-    .src(['js/**/*.test.js'], { read: false })
+gulp.task('testing', function () {
+  return gulp.src(['js/**/*.test.js'], { read: false })
     .pipe(mocha({
-      compilers: ['js:babel-register'], // Включим поддержку "import/export" в Mocha тестах
-      reporter: 'spec' // Вид в котором я хочу отображать результаты тестирования
+      compilers: ['js:babel-register'],
+      reporter: 'spec'
     }));
 });
+
 
 gulp.task('style', function () {
   return gulp.src('sass/style.scss')
