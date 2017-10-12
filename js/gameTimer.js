@@ -1,13 +1,20 @@
-const gameTimer = (sec) => {
-  return {
-    'tick': () => {
-      sec -= 1;
-      if (sec <= 0) {
-        return `time is over`;
-      }
-      return sec;
-    }
-  };
-};
+class GameTimer {
 
-export default gameTimer;
+  constructor(sec) {
+    this.sec = sec;
+  }
+
+  getTime() {
+    return this.sec;
+  }
+
+  tick() {
+    this.sec -= 1;
+    if (this.sec <= 0) {
+      return `time is over`;
+    }
+    return this.sec;
+  }
+}
+
+export default GameTimer;

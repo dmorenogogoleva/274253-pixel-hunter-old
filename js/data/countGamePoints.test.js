@@ -42,50 +42,38 @@ const makeComplicatedTestArray = (nameOfArray, answer1, answer2, rapidness1, rap
 };
 
 describe(`Count game points`, () => {
-  const allAnswersNormalTimeArray = makeTestArray(`allAnswersNormalTimeArray`, true, false, false);
   it(`user answered at all questions with normal speed and saved all lives`, () => {
+    const allAnswersNormalTimeArray = makeTestArray(`allAnswersNormalTimeArray`, true, false, false);
     assert.equal(countGamePoints(allAnswersNormalTimeArray, ALL_LIFES), 1150);
   });
-});
 
-describe(`Count game points`, () => {
-  const noAnswersRapidTimeArray = makeTestArray(`noAnswersRapidTimeArray`, false, true, false);
   it(`user failed all questions with rapid speed and saved all lives`, () => {
+    const noAnswersRapidTimeArray = makeTestArray(`noAnswersRapidTimeArray`, false, true, false);
     assert.equal(countGamePoints(noAnswersRapidTimeArray, ALL_LIFES), 650);
   });
-});
 
-describe(`Count game points`, () => {
-  const allAnswersSlowTimeArray = makeTestArray(`allAnswersSlowTimeArray`, true, false, true);
   it(`user answered at all questions with slow speed and saved all lives`, () => {
+    const allAnswersSlowTimeArray = makeTestArray(`allAnswersSlowTimeArray`, true, false, true);
     assert.equal(countGamePoints(allAnswersSlowTimeArray, ALL_LIFES), 650);
   });
-});
 
-describe(`Count game points`, () => {
-  const noAnswersSlowTimeArray = makeTestArray(`noAnswersSlowTimeArray`, false, false, true);
   it(`user failed all questions with slow speed and saved no lives`, () => {
+    const noAnswersSlowTimeArray = makeTestArray(`noAnswersSlowTimeArray`, false, false, true);
     assert.equal(countGamePoints(noAnswersSlowTimeArray, NO_LIFES), -500);
   });
-});
 
-describe(`Count game points`, () => {
-  const halfTrueHalfFalseAnswersSlowTimeArray = makeComplicatedTestArray(`halfTrueHalfFalseAnswersSlowTimeArray`, true, false, false, false, true, true);
   it(`user answered to half questions with slow speed and saved no lives`, () => {
+    const halfTrueHalfFalseAnswersSlowTimeArray = makeComplicatedTestArray(`halfTrueHalfFalseAnswersSlowTimeArray`, true, false, false, false, true, true);
     assert.equal(countGamePoints(halfTrueHalfFalseAnswersSlowTimeArray, ALL_LIFES), 150);
   });
-});
 
-describe(`Count game points`, () => {
-  const halfTrueHalfFalseAnswersHalfRapidHalfSlowTimeArray = makeComplicatedTestArray(`halfTrueHalfFalseAnswersHalfRapidHalfSlowTimeArray`, true, false, true, false, true, false);
   it(`user answered to half questions with half rapid and half slow speed and saved no lives`, () => {
+    const halfTrueHalfFalseAnswersHalfRapidHalfSlowTimeArray = makeComplicatedTestArray(`halfTrueHalfFalseAnswersHalfRapidHalfSlowTimeArray`, true, false, true, false, true, false);
     assert.equal(countGamePoints(halfTrueHalfFalseAnswersHalfRapidHalfSlowTimeArray, NO_LIFES), 500);
   });
-});
 
-describe(`Count game points`, () => {
-  const halfTrueHalfFalseAnswersHalfRapidTimeArray = makeComplicatedTestArray(`halfTrueHalfFalseAnswersHalfRapidHalfSlowTimeArray`, true, false, true, false, false, false);
   it(`user answered to half questions with half rapid speed and saved two lives`, () => {
+    const halfTrueHalfFalseAnswersHalfRapidTimeArray = makeComplicatedTestArray(`halfTrueHalfFalseAnswersHalfRapidHalfSlowTimeArray`, true, false, true, false, false, false);
     assert.equal(countGamePoints(halfTrueHalfFalseAnswersHalfRapidTimeArray, TWO_LIFES), 850);
   });
 });
