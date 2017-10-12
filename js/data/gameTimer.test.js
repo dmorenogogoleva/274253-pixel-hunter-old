@@ -9,7 +9,6 @@ const timerWithOneSecond = new GameTimer(ONE_SECOND);
 const newTimer = new GameTimer(TEN_SECONDS);
 
 describe(`Check game timer`, () => {
-
   it(`method getTime returns timer time`, () => {
     assert.equal(timer.getTime(), 10);
   });
