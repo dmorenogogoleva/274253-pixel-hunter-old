@@ -2,6 +2,7 @@ import createElement from './createElement';
 import showScreen from './showScreen';
 import statsLayoutDom from './statsScreen';
 import headerLayout from './headerLayout';
+import statsLayout from './statsLayout';
 import footerLayout from './footerLayout';
 import backToGreetingScreen from './backToGreetingScreen';
 
@@ -21,20 +22,7 @@ ${headerLayout}
           <img src="http://placehold.it/304x455" alt="Option 1" width="304" height="455">
         </div>
       </form>
-      <div class="stats">
-        <ul class="stats">
-          <li class="stats__result stats__result--wrong"></li>
-          <li class="stats__result stats__result--slow"></li>
-          <li class="stats__result stats__result--fast"></li>
-          <li class="stats__result stats__result--correct"></li>
-          <li class="stats__result stats__result--wrong"></li>
-          <li class="stats__result stats__result--unknown"></li>
-          <li class="stats__result stats__result--slow"></li>
-          <li class="stats__result stats__result--unknown"></li>
-          <li class="stats__result stats__result--fast"></li>
-          <li class="stats__result stats__result--unknown"></li>
-        </ul>
-      </div>
+${statsLayout}
     </div>
   </div>
   ${footerLayout}`;
