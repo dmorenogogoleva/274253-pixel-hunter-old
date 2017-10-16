@@ -2,12 +2,13 @@ import createElement from './createElement';
 import showScreen from './showScreen';
 import pickPaintingFromImagesLayoutDom from './pickPaintingFromImagesScreen';
 import headerLayout from './headerLayout';
-import statsLayout from './statsLayout';
+import {statsLayout, initialStatsState} from './statsLayout';
 import footerLayout from './footerLayout';
 import backToGreetingScreen from './backToGreetingScreen';
 import isItPaintOrPhoto from './isItPaintOrPhoto';
 import {findRandomRangeNum, questions, randomArrayElement} from './randomQuestion';
 import testImages from './testImages';
+import gameStats from './gameStats';
 
 const randomArr = randomArrayElement(testImages);
 const randomImage = randomArr[findRandomRangeNum(0, testImages.length)];
@@ -30,13 +31,27 @@ ${headerLayout}
         </label>
       </div>
     </form>
-${statsLayout}
+${statsLayout(initialStatsState)}
   </div>
 </div>
   ${footerLayout}`;
 
+
+const gameAnswerState = {
+  'id': 1,
+  'answer': ``,
+  'rapid': ``,
+  'slow': ``
+};
+
+const gameStatsState = initialStatsState;
+
 const pickPhotoOrPaintingLayoutDom = createElement(pickPhotoOrPaintingLayout);
 const pickPaintingFromImagesScreen = () => showScreen(pickPaintingFromImagesLayoutDom);
+
+
+// не получилось менять иконки потому что экраны отрисовываются раньше чем
+// создается gameStats. ничего не понятно
 
 const gameAnswers = pickPhotoOrPaintingLayoutDom.querySelectorAll(`.game__answer`);
 
@@ -45,15 +60,12 @@ gameAnswers.forEach(function (btn) {
     pickPaintingFromImagesScreen();
     const userAnswer = isItPaintOrPhoto(btn);
     const trueAnswer = (testImages.indexOf(randomArr) === 0) ? `paint` : `photo`;
-    return console.log(userAnswer === trueAnswer);
+    gameAnswerState.answer = userAnswer === trueAnswer;
+    gameStats(gameAnswerState, gameStatsState);
   });
 });
 
-// const isAnswerRight = (answer) => {
-//   console.log(paintOrPhoto);
-//   return (answer);
-// };
 
 backToGreetingScreen(pickPhotoOrPaintingLayoutDom);
 
-export default pickPhotoOrPaintingLayoutDom;
+export {pickPhotoOrPaintingLayoutDom, gameStatsState};
