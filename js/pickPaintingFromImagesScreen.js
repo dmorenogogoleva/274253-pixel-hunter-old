@@ -1,12 +1,12 @@
+import testImages from './testImages';
 import createElement from './createElement';
-import showScreen from './showScreen';
-import statsLayoutDom from './statsScreen';
+import showRandomGameScreen from './showRandomGameScreen';
+import {findRandomRangeNum} from './randomQuestion';
+import backToGreetingScreen from './backToGreetingScreen';
 import headerLayout from './headerLayout';
 import {statsLayout, initialStatsState} from './statsLayout';
 import footerLayout from './footerLayout';
-import backToGreetingScreen from './backToGreetingScreen';
-import {findRandomRangeNum} from './randomQuestion';
-import testImages from './testImages';
+
 
 const paintingsArr = testImages[0];
 const photosArr = testImages[1];
@@ -51,16 +51,16 @@ const gameAnswerState = {
 };
 
 const pickPaintingFromImagesLayoutDom = createElement(pickPaintingFromImagesLayout);
-const showStatsScreen = () => showScreen(statsLayoutDom);
+
 
 const gameOptions = pickPaintingFromImagesLayoutDom.querySelectorAll(`.game__option`);
 
 gameOptions.forEach(function (btn) {
   btn.addEventListener(`click`, function () {
+    showRandomGameScreen();
     const userAnswer = btn.querySelector(`.game__image`).src;
     const trueAnswer = imagesArr[2];
     gameAnswerState.answer = userAnswer === trueAnswer;
-    // showStatsScreen();
   });
 });
 

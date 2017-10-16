@@ -1,17 +1,21 @@
+import testImages from './testImages';
 import createElement from './createElement';
-import showScreen from './showScreen';
-import pickPaintingFromImagesLayoutDom from './pickPaintingFromImagesScreen';
+import showRandomGameScreen from './showRandomGameScreen';
+import {findRandomRangeNum, questions, randomArrayElement} from './randomQuestion';
+import isItPaintOrPhoto from './isItPaintOrPhoto';
+import changeGameStats from './changeGameStats';
+import backToGreetingScreen from './backToGreetingScreen';
 import headerLayout from './headerLayout';
 import {statsLayout, initialStatsState} from './statsLayout';
 import footerLayout from './footerLayout';
-import backToGreetingScreen from './backToGreetingScreen';
-import isItPaintOrPhoto from './isItPaintOrPhoto';
-import {findRandomRangeNum, questions, randomArrayElement} from './randomQuestion';
-import testImages from './testImages';
-import gameStats from './gameStats';
+
 
 const randomArr = randomArrayElement(testImages);
-const randomImage = randomArr[findRandomRangeNum(0, testImages.length)];
+
+const findRandomImage = () => {
+  const randomImage = randomArr[findRandomRangeNum(0, testImages.length)];
+  return randomImage;
+};
 
 const pickPhotoOrPaintingLayout = `
 ${headerLayout}
@@ -20,7 +24,7 @@ ${headerLayout}
     <p class="game__task">${randomArrayElement(questions)}</p>
     <form class="game__content  game__content--wide">
       <div class="game__option">
-        <img src="${randomImage}" alt="Option 1" width="705" height="455">
+        <img src="${window.onload = findRandomImage()}" alt="Option 1" width="705" height="455">
         <label class="game__answer  game__answer--photo">
           <input name="question1" type="radio" value="photo">
           <span>Фото</span>
@@ -47,21 +51,25 @@ const gameAnswerState = {
 const gameStatsState = initialStatsState;
 
 const pickPhotoOrPaintingLayoutDom = createElement(pickPhotoOrPaintingLayout);
-const pickPaintingFromImagesScreen = () => showScreen(pickPaintingFromImagesLayoutDom);
 
 
 // не получилось менять иконки потому что экраны отрисовываются раньше чем
-// создается gameStats. ничего не понятно
+// создается changeGameStats. ничего не понятно
 
 const gameAnswers = pickPhotoOrPaintingLayoutDom.querySelectorAll(`.game__answer`);
 
+let count = 0;
+
 gameAnswers.forEach(function (btn) {
   btn.addEventListener(`click`, function () {
-    pickPaintingFromImagesScreen();
-    const userAnswer = isItPaintOrPhoto(btn);
-    const trueAnswer = (testImages.indexOf(randomArr) === 0) ? `paint` : `photo`;
-    gameAnswerState.answer = userAnswer === trueAnswer;
-    gameStats(gameAnswerState, gameStatsState);
+    count += 1;
+    if (count >= gameAnswers.length) {
+      showRandomGameScreen();
+      const userAnswer = isItPaintOrPhoto(btn);
+      const trueAnswer = (testImages.indexOf(randomArr) === 0) ? `paint` : `photo`;
+      gameAnswerState.answer = userAnswer === trueAnswer;
+      changeGameStats(gameAnswerState, gameStatsState);
+    }
   });
 });
 

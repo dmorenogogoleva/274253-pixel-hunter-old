@@ -1,14 +1,14 @@
+import testImages from './testImages';
 import createElement from './createElement';
-import showScreen from './showScreen';
-import {pickPhotoOrPaintingLayoutDom} from './pickPhotoOrPaintingScreen';
+import showRandomGameScreen from './showRandomGameScreen';
+import {findRandomRangeNum, questions, randomArrayElement} from './randomQuestion';
+import isItPaintOrPhoto from './isItPaintOrPhoto';
+import changeGameStats from './changeGameStats';
+import backToGreetingScreen from './backToGreetingScreen';
 import headerLayout from './headerLayout';
 import {statsLayout, initialStatsState} from './statsLayout';
 import footerLayout from './footerLayout';
-import backToGreetingScreen from './backToGreetingScreen';
-import isItPaintOrPhoto from './isItPaintOrPhoto';
-import {findRandomRangeNum, questions, randomArrayElement} from './randomQuestion';
-import testImages from './testImages';
-import gameStats from './gameStats';
+
 
 const firstRandomArr = randomArrayElement(testImages);
 const secondRandomArr = randomArrayElement(testImages);
@@ -66,7 +66,7 @@ const gameSecondAnswerState = {
 
 
 const pickPhotoOrPaintingFromTwoLayoutDom = createElement(pickPhotoOrPaintingFromTwoLayout);
-const showGPhotoOrPaintingScreen = () => showScreen(pickPhotoOrPaintingLayoutDom);
+
 
 const gameOptionFields = pickPhotoOrPaintingFromTwoLayoutDom.querySelectorAll(`.game__option`);
 const gameContent = pickPhotoOrPaintingFromTwoLayoutDom.querySelector(`.game__content`);
@@ -96,13 +96,12 @@ const gameSecondStatsState = initialStatsState;
 
 gameOptionFields.forEach(function (element) {
   element.addEventListener(`click`, function () {
-
     let count = 0;
     count = gameContent.querySelectorAll(`input[type=radio]:checked`).length;
-    if (count === gameOptionFields.length) {
-      showGPhotoOrPaintingScreen();
-      gameStats(gameFirstAnswerState, gameFirstStatsState);
-      gameStats(gameSecondAnswerState, gameSecondStatsState);
+    if (count >= gameOptionFields.length) {
+      showRandomGameScreen();
+      changeGameStats(gameFirstAnswerState, gameFirstStatsState);
+      changeGameStats(gameSecondAnswerState, gameSecondStatsState);
     }
   });
 });
