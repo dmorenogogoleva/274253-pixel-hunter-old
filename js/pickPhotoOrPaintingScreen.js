@@ -8,6 +8,7 @@ import backToGreetingScreen from './backToGreetingScreen';
 import headerLayout from './headerLayout';
 import {statsLayout, initialStatsState} from './statsLayout';
 import footerLayout from './footerLayout';
+import {gameAnswers, gameAnswerState} from './gameAnswers';
 
 
 const randomArr = randomArrayElement(testImages);
@@ -27,11 +28,11 @@ ${headerLayout}
         <img src="${window.onload = findRandomImage()}" alt="Option 1" width="705" height="455">
         <label class="game__answer  game__answer--photo">
           <input name="question1" type="radio" value="photo">
-          <span>Фото</span>
+          <span class="game__span game__span--photo photo">Фото</span>
         </label>
         <label class="game__answer  game__answer--wide  game__answer--paint">
           <input name="question1" type="radio" value="paint">
-          <span>Рисунок</span>
+          <span class="game__span game__span--paint paint">Рисунок</span>
         </label>
       </div>
     </form>
@@ -41,13 +42,6 @@ ${statsLayout(initialStatsState)}
   ${footerLayout}`;
 
 
-const gameAnswerState = {
-  'id': 1,
-  'answer': ``,
-  'rapid': ``,
-  'slow': ``
-};
-
 const gameStatsState = initialStatsState;
 
 const pickPhotoOrPaintingLayoutDom = createElement(pickPhotoOrPaintingLayout);
@@ -55,24 +49,36 @@ const pickPhotoOrPaintingLayoutDom = createElement(pickPhotoOrPaintingLayout);
 
 // не получилось менять иконки потому что экраны отрисовываются раньше чем
 // создается changeGameStats. ничего не понятно
+const gameAnswersBtns = pickPhotoOrPaintingLayoutDom.querySelectorAll(`.game__answer`);
 
-const gameAnswers = pickPhotoOrPaintingLayoutDom.querySelectorAll(`.game__answer`);
 
-let count = 0;
-
-gameAnswers.forEach(function (btn) {
+gameAnswersBtns.forEach(function (btn) {
   btn.addEventListener(`click`, function () {
-    count += 1;
-    if (count >= gameAnswers.length) {
-      showRandomGameScreen();
-      const userAnswer = isItPaintOrPhoto(btn);
-      const trueAnswer = (testImages.indexOf(randomArr) === 0) ? `paint` : `photo`;
-      gameAnswerState.answer = userAnswer === trueAnswer;
-      changeGameStats(gameAnswerState, gameStatsState);
-    }
+    showRandomGameScreen();
   });
 });
 
+
+const gameAnswerPhotoBtn = pickPhotoOrPaintingLayoutDom.querySelector(`.game__span--photo`);
+const gameAnswerPaintBtn = pickPhotoOrPaintingLayoutDom.querySelector(`.game__span--paint`);
+
+gameAnswerPhotoBtn.addEventListener(`click`, function () {
+  const userAnswer = isItPaintOrPhoto(gameAnswerPhotoBtn);
+  const trueAnswer = (testImages.indexOf(randomArr) === 0) ? `paint` : `photo`;
+  gameAnswerState.answer = userAnswer === trueAnswer;
+  gameAnswerState.id += 1;
+  gameAnswers.push(gameAnswerState);
+  changeGameStats(gameAnswerState, gameStatsState);
+});
+
+gameAnswerPaintBtn.addEventListener(`click`, function () {
+  const userAnswer = isItPaintOrPhoto(gameAnswerPaintBtn);
+  const trueAnswer = (testImages.indexOf(randomArr) === 0) ? `paint` : `photo`;
+  gameAnswerState.answer = userAnswer === trueAnswer;
+  gameAnswerState.id += 1;
+  gameAnswers.push(gameAnswerState);
+  changeGameStats(gameAnswerState, gameStatsState);
+});
 
 backToGreetingScreen(pickPhotoOrPaintingLayoutDom);
 

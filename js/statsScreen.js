@@ -2,6 +2,7 @@ import createElement from './createElement';
 import footerLayout from './footerLayout';
 import backToGreetingScreen from './backToGreetingScreen';
 
+
 const statsLayout = `<div id="stats-div" class="stats central__content">
     <header class="header">
       <div class="header__back">
