@@ -22,16 +22,28 @@ const compareElement = () => {
 };
 
 let countOfShowedScreens = 0;
+let countOfMistakes = 0;
 
 const showRandomGameScreen = () => {
   gameScreens.sort(compareElement);
-
   countOfShowedScreens += 1;
+
+
+  for (const answer of gameAnswers) {
+    if (answer.answer === false) {
+      countOfMistakes += 1;
+      if (countOfMistakes >= 3) {
+        const finalAnswers = gameAnswers.slice();
+        return showStatsScreen(finalAnswers);
+      }
+    }
+  }
 
   if (countOfShowedScreens >= 10) {
     const finalAnswers = gameAnswers.slice();
     return showStatsScreen(finalAnswers);
   }
+
   return gameScreens[0]();
 };
 
