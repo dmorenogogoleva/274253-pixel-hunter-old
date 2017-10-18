@@ -1,9 +1,11 @@
 import {answerIcons} from './statsLayout';
 
 const changeGameStats = (stateAnswer, statsState) => {
-  // имхо это лишняя переменная но без нее линтер ругается
-  const statsAns = stateAnswer.answer ? statsState.first = answerIcons.correctAns : statsState.first = answerIcons.wrongAns;
-  return statsAns;
+  if (stateAnswer.answer) {
+    statsState.first = answerIcons.correctAns;
+  } else {
+    statsState.first = answerIcons.wrongAns;
+  }
 };
 
 export default changeGameStats;

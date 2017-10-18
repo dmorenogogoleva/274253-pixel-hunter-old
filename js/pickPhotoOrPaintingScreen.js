@@ -25,7 +25,7 @@ ${headerLayout}
     <p class="game__task">${randomArrayElement(questions)}</p>
     <form class="game__content  game__content--wide">
       <div class="game__option">
-        <img src="${window.onload = findRandomImage()}" alt="Option 1" width="705" height="455">
+        <img src="${findRandomImage()}" alt="Option 1" width="705" height="455">
         <label class="game__answer  game__answer--photo">
           <input name="question1" type="radio" value="photo">
           <span class="game__span game__span--photo photo">Фото</span>

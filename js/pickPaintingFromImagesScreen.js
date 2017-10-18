@@ -18,11 +18,11 @@ const painting = paintingsArr[findRandomRangeNum(0, paintingsArr.length - 1)];
 const imagesArr = [photoFirst, photoSecond, painting];
 
 
-const compareElement = () => {
+const valueForRandomSorting = () => {
   return Math.random() - 0.5;
 };
 
-const newImagesArr = imagesArr.slice().sort(compareElement);
+const newImagesArr = imagesArr.slice().sort(valueForRandomSorting);
 
 
 const pickPaintingFromImagesLayout = `
