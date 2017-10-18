@@ -2,6 +2,72 @@ import createElement from './createElement';
 import footerLayout from './footerLayout';
 import backToGreetingScreen from './backToGreetingScreen';
 
+const answersArr = [
+  {
+    'id': 1,
+    'answer': true,
+    'rapid': ``,
+    'slow': ``
+  },
+  {
+    'id': 2,
+    'answer': true,
+    'rapid': ``,
+    'slow': ``
+  },
+  {
+    'id': 3,
+    'answer': true,
+    'rapid': ``,
+    'slow': ``
+  },
+  {
+    'id': 4,
+    'answer': true,
+    'rapid': ``,
+    'slow': ``
+  },
+  {
+    'id': 5,
+    'answer': true,
+    'rapid': ``,
+    'slow': ``
+  },
+  {
+    'id': 6,
+    'answer': false,
+    'rapid': ``,
+    'slow': ``
+  },
+  {
+    'id': 7,
+    'answer': false,
+    'rapid': ``,
+    'slow': ``
+  },
+  {
+    'id': 8,
+    'answer': false,
+    'rapid': ``,
+    'slow': ``
+  },
+  {
+    'id': 9,
+    'answer': false,
+    'rapid': ``,
+    'slow': ``
+  },
+  {
+    'id': 10,
+    'answer': false,
+    'rapid': ``,
+    'slow': ``
+  }
+];
+
+const setAnswerIcon = (answer) => {
+  return answer.answer ? `stats__result--correct` : `stats__result--wrong`;
+};
 
 const statsLayout = `<div id="stats-div" class="stats central__content">
     <header class="header">
@@ -19,16 +85,16 @@ const statsLayout = `<div id="stats-div" class="stats central__content">
           <td class="result__number">1.</td>
           <td colspan="2">
             <ul class="stats">
-              <li class="stats__result stats__result--wrong"></li>
-              <li class="stats__result stats__result--slow"></li>
-              <li class="stats__result stats__result--fast"></li>
-              <li class="stats__result stats__result--correct"></li>
-              <li class="stats__result stats__result--wrong"></li>
-              <li class="stats__result stats__result--unknown"></li>
-              <li class="stats__result stats__result--slow"></li>
-              <li class="stats__result stats__result--unknown"></li>
-              <li class="stats__result stats__result--fast"></li>
-              <li class="stats__result stats__result--unknown"></li>
+              <li class="stats__result ${setAnswerIcon(answersArr[0])}"></li>
+              <li class="stats__result ${setAnswerIcon(answersArr[1])}"></li>
+              <li class="stats__result ${setAnswerIcon(answersArr[2])}"></li>
+              <li class="stats__result ${setAnswerIcon(answersArr[3])}"></li>
+              <li class="stats__result ${setAnswerIcon(answersArr[4])}"></li>
+              <li class="stats__result ${setAnswerIcon(answersArr[5])}"></li>
+              <li class="stats__result ${setAnswerIcon(answersArr[6])}"></li>
+              <li class="stats__result ${setAnswerIcon(answersArr[7])}"></li>
+              <li class="stats__result ${setAnswerIcon(answersArr[8])}"></li>
+              <li class="stats__result ${setAnswerIcon(answersArr[9])}"></li>
             </ul>
           </td>
           <td class="result__points">×&nbsp;100</td>

@@ -9,7 +9,10 @@ const showPhotoOrPaintingScreen = () => showScreen(pickPhotoOrPaintingLayoutDom)
 const pickPhotoOrPaintingFromTwoScreen = () => showScreen(pickPhotoOrPaintingFromTwoLayoutDom);
 const pickPaintingFromImagesScreen = () => showScreen(pickPaintingFromImagesLayoutDom);
 
-const showStatsScreen = () => showScreen(statsLayoutDom);
+const showStatsScreen = (ans) => {
+  showScreen(statsLayoutDom);
+  return ans;
+};
 
 
 const gameScreens = [showPhotoOrPaintingScreen, pickPhotoOrPaintingFromTwoScreen, pickPaintingFromImagesScreen];
@@ -27,11 +30,9 @@ const showRandomGameScreen = () => {
 
   if (countOfShowedScreens >= 10) {
     const finalAnswers = gameAnswers.slice();
-    showStatsScreen();
-    return finalAnswers;
+    return showStatsScreen(finalAnswers);
   }
   return gameScreens[0]();
 };
-
 
 export default showRandomGameScreen;
