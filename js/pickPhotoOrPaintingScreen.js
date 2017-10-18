@@ -1,6 +1,6 @@
 import testImages from './testImages';
 import createElement from './createElement';
-import showRandomGameScreen from './showRandomGameScreen';
+import showNextGameScreen from './showNextGameScreen';
 import {findRandomRangeNum, questions, randomArrayElement} from './randomQuestion';
 import isItPaintOrPhoto from './isItPaintOrPhoto';
 import changeGameStats from './changeGameStats';
@@ -54,7 +54,7 @@ const gameAnswersBtns = pickPhotoOrPaintingLayoutDom.querySelectorAll(`.game__an
 
 gameAnswersBtns.forEach(function (btn) {
   btn.addEventListener(`click`, function () {
-    showRandomGameScreen();
+    showNextGameScreen();
   });
 });
 

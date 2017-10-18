@@ -1,6 +1,6 @@
 import testImages from './testImages';
 import createElement from './createElement';
-import showRandomGameScreen from './showRandomGameScreen';
+import showNextGameScreen from './showNextGameScreen';
 import {findRandomRangeNum} from './randomQuestion';
 import backToGreetingScreen from './backToGreetingScreen';
 import headerLayout from './headerLayout';
@@ -53,7 +53,7 @@ const gameOptions = pickPaintingFromImagesLayoutDom.querySelectorAll(`.game__opt
 
 gameOptions.forEach(function (btn) {
   btn.addEventListener(`click`, function () {
-    showRandomGameScreen();
+    showNextGameScreen();
     const userAnswer = btn.querySelector(`.game__image`).src;
     const trueAnswer = imagesArr[2];
     gameAnswerState.answer = userAnswer === trueAnswer;

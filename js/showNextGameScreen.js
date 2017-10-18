@@ -11,12 +11,6 @@ const showPhotoOrPaintingScreen = () => showScreen(pickPhotoOrPaintingLayoutDom)
 const pickPhotoOrPaintingFromTwoScreen = () => showScreen(pickPhotoOrPaintingFromTwoLayoutDom);
 const pickPaintingFromImagesScreen = () => showScreen(pickPaintingFromImagesLayoutDom);
 
-// const showStatsScreen = (ans) => {
-//   showScreen(statsLayoutDom);
-//   return ans;
-// };
-
-
 const gameScreens = [showPhotoOrPaintingScreen, pickPhotoOrPaintingFromTwoScreen, pickPaintingFromImagesScreen];
 
 const valueForRandomSorting = () => {
@@ -27,17 +21,26 @@ let countOfShowedScreens = 0;
 let countOfMistakes = 0;
 
 
-const showRandomGameScreen = () => {
+const showNextGameScreen = () => {
   gameScreens.sort(valueForRandomSorting);
   countOfShowedScreens += 1;
 
-  const setAnswerIcon = (answer) => {
-    return answer ? `stats__result--correct` : `stats__result--wrong`;
+  const setAnswersInTable = (answersArray) => {
+
+    let arr = [];
+    for (const ans of answersArray) {
+      if (ans.answer) {
+        arr.push(`<li class="stats__result stats__result--correct"></li>`);
+      } else {
+        arr.push(`<li class="stats__result stats__result--wrong"></li>`);
+      }
+    }
+    return arr.join(` `);
   };
 
   const showStatsScreen = () => {
     const finalAnswers = gameAnswers.slice();
-    const statsLayoutDom = createElement(statsLayout(setAnswerIcon(finalAnswers[0].answer)));
+    const statsLayoutDom = createElement(statsLayout(setAnswersInTable(finalAnswers)));
     backToGreetingScreen(statsLayoutDom);
     return showScreen(statsLayoutDom);
   };
@@ -58,4 +61,4 @@ const showRandomGameScreen = () => {
   return gameScreens[0]();
 };
 
-export default showRandomGameScreen;
+export default showNextGameScreen;

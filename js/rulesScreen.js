@@ -1,6 +1,6 @@
 import createElement from './createElement';
 import backToGreetingScreen from './backToGreetingScreen';
-import showRandomGameScreen from './showRandomGameScreen';
+import showNextGameScreen from './showNextGameScreen';
 import footerLayout from './footerLayout';
 
 
@@ -53,7 +53,7 @@ const rulesInputInputHandler = function () {
 
 rulesInput.addEventListener(`input`, rulesInputInputHandler);
 // попробовала поменять на submit еще раз, форма не отправляется, страница перезагружается и всё(
-rulesButton.addEventListener(`click`, showRandomGameScreen);
+rulesButton.addEventListener(`click`, showNextGameScreen);
 
 backToGreetingScreen(rulesLayoutDom);
 

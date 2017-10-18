@@ -1,6 +1,6 @@
 import testImages from './testImages';
 import createElement from './createElement';
-import showRandomGameScreen from './showRandomGameScreen';
+import showNextGameScreen from './showNextGameScreen';
 import {findRandomRangeNum, questions, randomArrayElement} from './randomQuestion';
 import isItPaintOrPhoto from './isItPaintOrPhoto';
 import changeGameStats from './changeGameStats';
@@ -93,7 +93,7 @@ gameOptionFields.forEach(function (element) {
     let count = 0;
     count = gameContent.querySelectorAll(`input[type=radio]:checked`).length;
     if (count >= gameOptionFields.length) {
-      showRandomGameScreen();
+      showNextGameScreen();
       changeGameStats(gameAnswerState, gameFirstStatsState);
       changeGameStats(gameAnswerState, gameSecondStatsState);
     }

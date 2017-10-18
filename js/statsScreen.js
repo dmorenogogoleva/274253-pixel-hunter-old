@@ -16,7 +16,7 @@ const statsLayout = (cb) => `<div id="stats-div" class="stats central__content">
           <td class="result__number">1.</td>
           <td colspan="2">
             <ul class="stats">
-              <li class="stats__result ${cb}"></li>
+              ${cb}
             </ul>
           </td>
           <td class="result__points">×&nbsp;100</td>
