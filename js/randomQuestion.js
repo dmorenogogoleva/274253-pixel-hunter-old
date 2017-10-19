@@ -8,4 +8,8 @@ const randomArrayElement = (arr) => {
   return (findRandomRangeNum(-1, 1) < 0) ? arr[0] : arr[1];
 };
 
-export {findRandomRangeNum, questions, randomArrayElement};
+const findRandomImage = (arrayOfTypes, arrayOfImages) => {
+  return arrayOfTypes[findRandomRangeNum(0, arrayOfImages.length)];
+};
+
+export {findRandomRangeNum, questions, randomArrayElement, findRandomImage};

@@ -1,22 +1,16 @@
 import testImages from './testImages';
 import createElement from './createElement';
 import showNextGameScreen from './showNextGameScreen';
-import {findRandomRangeNum, questions, randomArrayElement} from './randomQuestion';
+import {questions, randomArrayElement, findRandomImage} from './randomQuestion';
 import isItPaintOrPhoto from './isItPaintOrPhoto';
-import changeGameStats from './changeGameStats';
 import backToGreetingScreen from './backToGreetingScreen';
 import headerLayout from './headerLayout';
 import {statsLayout, initialStatsState} from './statsLayout';
 import footerLayout from './footerLayout';
-import {gameAnswers, gameAnswerState} from './gameAnswers';
+import {gameAnswers} from './gameAnswers';
 
 
 const randomArr = randomArrayElement(testImages);
-
-const findRandomImage = () => {
-  const randomImage = randomArr[findRandomRangeNum(0, testImages.length)];
-  return randomImage;
-};
 
 const pickPhotoOrPaintingLayout = `
 ${headerLayout}
@@ -25,7 +19,7 @@ ${headerLayout}
     <p class="game__task">${randomArrayElement(questions)}</p>
     <form class="game__content  game__content--wide">
       <div class="game__option">
-        <img src="${findRandomImage()}" alt="Option 1" width="705" height="455">
+        <img src="${findRandomImage(randomArr, testImages)}" alt="Option 1" width="705" height="455">
         <label class="game__answer  game__answer--photo">
           <input name="question1" type="radio" value="photo">
           <span class="game__span game__span--photo photo">Фото</span>
@@ -43,12 +37,7 @@ ${statsLayout(initialStatsState)}
 
 
 const gameStatsState = initialStatsState;
-
 const pickPhotoOrPaintingLayoutDom = createElement(pickPhotoOrPaintingLayout);
-
-
-// не получилось менять иконки потому что экраны отрисовываются раньше чем
-// создается changeGameStats. ничего не понятно
 const gameAnswersBtns = pickPhotoOrPaintingLayoutDom.querySelectorAll(`.game__answer`);
 
 
@@ -65,19 +54,17 @@ const gameAnswerPaintBtn = pickPhotoOrPaintingLayoutDom.querySelector(`.game__sp
 gameAnswerPhotoBtn.addEventListener(`click`, function () {
   const userAnswer = isItPaintOrPhoto(gameAnswerPhotoBtn);
   const trueAnswer = (testImages.indexOf(randomArr) === 0) ? `paint` : `photo`;
-  gameAnswerState.answer = userAnswer === trueAnswer;
-  gameAnswerState.id += 1;
-  gameAnswers.push(gameAnswerState);
-  changeGameStats(gameAnswerState, gameStatsState);
+  let gameAnswer = {};
+  gameAnswer.answer = userAnswer === trueAnswer;
+  gameAnswers.push(gameAnswer);
 });
 
 gameAnswerPaintBtn.addEventListener(`click`, function () {
   const userAnswer = isItPaintOrPhoto(gameAnswerPaintBtn);
   const trueAnswer = (testImages.indexOf(randomArr) === 0) ? `paint` : `photo`;
-  gameAnswerState.answer = userAnswer === trueAnswer;
-  gameAnswerState.id += 1;
-  gameAnswers.push(gameAnswerState);
-  changeGameStats(gameAnswerState, gameStatsState);
+  let gameAnswer = {};
+  gameAnswer.answer = userAnswer === trueAnswer;
+  gameAnswers.push(gameAnswer);
 });
 
 backToGreetingScreen(pickPhotoOrPaintingLayoutDom);

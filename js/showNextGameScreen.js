@@ -13,16 +13,12 @@ const pickPaintingFromImagesScreen = () => showScreen(pickPaintingFromImagesLayo
 
 const gameScreens = [showPhotoOrPaintingScreen, pickPhotoOrPaintingFromTwoScreen, pickPaintingFromImagesScreen];
 
-const valueForRandomSorting = () => {
-  return Math.random() - 0.5;
-};
-
 let countOfShowedScreens = 0;
 let countOfMistakes = 0;
 
 
 const showNextGameScreen = () => {
-  gameScreens.sort(valueForRandomSorting);
+  gameScreens.sort(() => Math.random() - 0.5);
   countOfShowedScreens += 1;
 
   const setAnswersInTable = (answersArray) => {

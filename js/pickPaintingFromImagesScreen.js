@@ -6,9 +6,7 @@ import backToGreetingScreen from './backToGreetingScreen';
 import headerLayout from './headerLayout';
 import {statsLayout, initialStatsState} from './statsLayout';
 import footerLayout from './footerLayout';
-import changeGameStats from './changeGameStats';
-import {gameAnswers, gameAnswerState} from './gameAnswers';
-
+import {gameAnswers} from './gameAnswers';
 
 const paintingsArr = testImages[0];
 const photosArr = testImages[1];
@@ -17,13 +15,7 @@ const photoSecond = photosArr[findRandomRangeNum(0, photosArr.length - 1)];
 const painting = paintingsArr[findRandomRangeNum(0, paintingsArr.length - 1)];
 const imagesArr = [photoFirst, photoSecond, painting];
 
-
-const valueForRandomSorting = () => {
-  return Math.random() - 0.5;
-};
-
-const newImagesArr = imagesArr.slice().sort(valueForRandomSorting);
-
+const newImagesArr = imagesArr.slice().sort(() => Math.random() - 0.5);
 
 const pickPaintingFromImagesLayout = `
 ${headerLayout}
@@ -48,7 +40,6 @@ ${statsLayout(initialStatsState)}
 
 const pickPaintingFromImagesLayoutDom = createElement(pickPaintingFromImagesLayout);
 
-
 const gameOptions = pickPaintingFromImagesLayoutDom.querySelectorAll(`.game__option`);
 
 gameOptions.forEach(function (btn) {
@@ -56,13 +47,12 @@ gameOptions.forEach(function (btn) {
     showNextGameScreen();
     const userAnswer = btn.querySelector(`.game__image`).src;
     const trueAnswer = imagesArr[2];
-    gameAnswerState.answer = userAnswer === trueAnswer;
-    gameAnswerState.id += 1;
-    changeGameStats(gameAnswerState, initialStatsState);
-    gameAnswers.push(gameAnswerState);
+
+    let gameAnswer = {};
+    gameAnswer.answer = userAnswer === trueAnswer;
+    gameAnswers.push(gameAnswer);
   });
 });
-
 
 backToGreetingScreen(pickPaintingFromImagesLayoutDom);
 
