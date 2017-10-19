@@ -3,9 +3,10 @@ import createElement from './createElement';
 import backToGreetingScreen from './backToGreetingScreen';
 import statsLayout from './statsScreen';
 import pickPhotoOrPaintingFromTwoLayoutDom from './pickPhotoOrPaintingFromTwoScreen';
-import {pickPhotoOrPaintingLayoutDom} from './pickPhotoOrPaintingScreen';
+import pickPhotoOrPaintingLayoutDom from './pickPhotoOrPaintingScreen';
 import pickPaintingFromImagesLayoutDom from './pickPaintingFromImagesScreen';
 import {gameAnswers} from './gameAnswers';
+import {answerIcons, currentStatsLayout} from './statsLayout';
 
 const showPhotoOrPaintingScreen = () => showScreen(pickPhotoOrPaintingLayoutDom);
 const pickPhotoOrPaintingFromTwoScreen = () => showScreen(pickPhotoOrPaintingFromTwoLayoutDom);

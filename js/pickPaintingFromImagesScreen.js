@@ -4,7 +4,7 @@ import showNextGameScreen from './showNextGameScreen';
 import {findRandomRangeNum} from './randomQuestion';
 import backToGreetingScreen from './backToGreetingScreen';
 import headerLayout from './headerLayout';
-import {statsLayout, initialStatsState} from './statsLayout';
+import {answerIcons, currentStatsLayout} from './statsLayout';
 import footerLayout from './footerLayout';
 import {gameAnswers} from './gameAnswers';
 
@@ -33,7 +33,7 @@ ${headerLayout}
           <img class="game__image" src="${newImagesArr[2]}" alt="Option 1" width="304" height="455">
         </div>
       </form>
-${statsLayout(initialStatsState)}
+${currentStatsLayout}
     </div>
   </div>
   ${footerLayout}`;

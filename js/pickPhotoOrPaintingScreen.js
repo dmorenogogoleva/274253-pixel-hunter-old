@@ -5,7 +5,7 @@ import {questions, randomArrayElement, findRandomImage} from './randomQuestion';
 import isItPaintOrPhoto from './isItPaintOrPhoto';
 import backToGreetingScreen from './backToGreetingScreen';
 import headerLayout from './headerLayout';
-import {statsLayout, initialStatsState} from './statsLayout';
+import {answerIcons, currentStatsLayout} from './statsLayout';
 import footerLayout from './footerLayout';
 import {gameAnswers} from './gameAnswers';
 
@@ -30,13 +30,11 @@ ${headerLayout}
         </label>
       </div>
     </form>
-${statsLayout(initialStatsState)}
+${currentStatsLayout}
   </div>
 </div>
   ${footerLayout}`;
 
-
-const gameStatsState = initialStatsState;
 const pickPhotoOrPaintingLayoutDom = createElement(pickPhotoOrPaintingLayout);
 const gameAnswersBtns = pickPhotoOrPaintingLayoutDom.querySelectorAll(`.game__answer`);
 
@@ -69,4 +67,4 @@ gameAnswerPaintBtn.addEventListener(`click`, function () {
 
 backToGreetingScreen(pickPhotoOrPaintingLayoutDom);
 
-export {pickPhotoOrPaintingLayoutDom, gameStatsState};
+export default pickPhotoOrPaintingLayoutDom;

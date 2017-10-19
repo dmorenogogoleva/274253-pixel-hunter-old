@@ -5,7 +5,7 @@ import {findRandomRangeNum, questions, randomArrayElement} from './randomQuestio
 import isItPaintOrPhoto from './isItPaintOrPhoto';
 import backToGreetingScreen from './backToGreetingScreen';
 import headerLayout from './headerLayout';
-import {statsLayout, initialStatsState} from './statsLayout';
+import {answerIcons, currentStatsLayout} from './statsLayout';
 import footerLayout from './footerLayout';
 import {gameAnswers} from './gameAnswers';
 
@@ -15,7 +15,7 @@ const firstRandomImage = firstRandomArr[findRandomRangeNum(0, testImages.length)
 const secondRandomImage = secondRandomArr[findRandomRangeNum(0, testImages.length)];
 
 
-const pickPhotoOrPaintingFromTwoLayout = `
+const pickPhotoOrPaintingFromTwoLayout = (cb) =>`
 ${headerLayout}
 <div id="game-1-div" class="game-1 central__content">
     <div class="game">
@@ -44,7 +44,7 @@ ${headerLayout}
           </label>
         </div>
       </form>
-${statsLayout(initialStatsState)}
+${cb}
     </div>
   </div>
   ${footerLayout}`;
