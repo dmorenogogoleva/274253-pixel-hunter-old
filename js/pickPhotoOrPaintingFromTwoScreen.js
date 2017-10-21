@@ -5,7 +5,6 @@ import {findRandomRangeNum, questions, randomArrayElement} from './randomQuestio
 import isItPaintOrPhoto from './isItPaintOrPhoto';
 import backToGreetingScreen from './backToGreetingScreen';
 import headerLayout from './headerLayout';
-import {answerIcons, currentStatsLayout} from './statsLayout';
 import footerLayout from './footerLayout';
 import {gameAnswers} from './gameAnswers';
 
