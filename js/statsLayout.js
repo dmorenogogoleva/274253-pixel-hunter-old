@@ -6,9 +6,9 @@ const answerIcons = {
   slowAns: `stats__result--slow`
 };
 
-const currentStatsLayout = (cb) => `<div class="stats">
+const currentStatsLayout = `<div class="stats">
         <ul class="stats">
-        ${cb}
+        <li class="stats__result stats__result--correct"></li>
         </ul>
       </div>`;
 

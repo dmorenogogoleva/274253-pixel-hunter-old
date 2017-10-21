@@ -6,7 +6,7 @@ import pickPhotoOrPaintingFromTwoLayoutDom from './pickPhotoOrPaintingFromTwoScr
 import pickPhotoOrPaintingLayoutDom from './pickPhotoOrPaintingScreen';
 import pickPaintingFromImagesLayoutDom from './pickPaintingFromImagesScreen';
 import {gameAnswers} from './gameAnswers';
-import {answerIcons, currentStatsLayout} from './statsLayout';
+import countGamePoints from './countGamePoints';
 
 const showPhotoOrPaintingScreen = () => showScreen(pickPhotoOrPaintingLayoutDom);
 const pickPhotoOrPaintingFromTwoScreen = () => showScreen(pickPhotoOrPaintingFromTwoLayoutDom);
@@ -14,13 +14,16 @@ const pickPaintingFromImagesScreen = () => showScreen(pickPaintingFromImagesLayo
 
 const gameScreens = [showPhotoOrPaintingScreen, pickPhotoOrPaintingFromTwoScreen, pickPaintingFromImagesScreen];
 
-let countOfShowedScreens = 0;
-let countOfMistakes = 0;
 
+let countOfShowedScreens = 0;
 
 const showNextGameScreen = () => {
+
+  let countOfMistakes = 0;
+
   gameScreens.sort(() => Math.random() - 0.5);
-  countOfShowedScreens += 1;
+
+  countOfShowedScreens += 0.5;
 
   const setAnswersInTable = (answersArray) => {
 
@@ -37,7 +40,12 @@ const showNextGameScreen = () => {
 
   const showStatsScreen = () => {
     const finalAnswers = gameAnswers.slice();
-    const statsLayoutDom = createElement(statsLayout(setAnswersInTable(finalAnswers)));
+
+    const setGamePointsInTable = countGamePoints(finalAnswers, 3);
+    const setFinalAnswersInTable = setAnswersInTable(finalAnswers);
+
+    const statsLayoutDom = createElement(statsLayout(setFinalAnswersInTable, setGamePointsInTable));
+
     backToGreetingScreen(statsLayoutDom);
     return showScreen(statsLayoutDom);
   };

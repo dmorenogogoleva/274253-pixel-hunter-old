@@ -15,7 +15,7 @@ const firstRandomImage = firstRandomArr[findRandomRangeNum(0, testImages.length)
 const secondRandomImage = secondRandomArr[findRandomRangeNum(0, testImages.length)];
 
 
-const pickPhotoOrPaintingFromTwoLayout = (cb) =>`
+const pickPhotoOrPaintingFromTwoLayout = `
 ${headerLayout}
 <div id="game-1-div" class="game-1 central__content">
     <div class="game">
@@ -44,7 +44,6 @@ ${headerLayout}
           </label>
         </div>
       </form>
-${cb}
     </div>
   </div>
   ${footerLayout}`;

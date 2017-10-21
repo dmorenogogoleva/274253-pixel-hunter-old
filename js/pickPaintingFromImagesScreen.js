@@ -4,7 +4,7 @@ import showNextGameScreen from './showNextGameScreen';
 import {findRandomRangeNum} from './randomQuestion';
 import backToGreetingScreen from './backToGreetingScreen';
 import headerLayout from './headerLayout';
-import {answerIcons, currentStatsLayout} from './statsLayout';
+import {currentStatsLayout} from './statsLayout';
 import footerLayout from './footerLayout';
 import {gameAnswers} from './gameAnswers';
 
