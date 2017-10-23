@@ -1,3 +1,5 @@
+import {gameAnswers} from './gameAnswers';
+
 const answerIcons = {
   unknownAns: `stats__result--unknown`,
   correctAns: `stats__result--correct`,
@@ -6,10 +8,19 @@ const answerIcons = {
   slowAns: `stats__result--slow`
 };
 
-const currentStatsLayout = `<div class="stats">
-        <ul class="stats">
-        <li class="stats__result stats__result--correct"></li>
-        </ul>
-      </div>`;
+const createCurrentStats = (answersArray) => {
+  let arr = [];
+  for (const ans of answersArray) {
+    if (ans.answer) {
+      arr.push(`<li class="stats__result stats__result--correct"></li>`);
+    } else {
+      arr.push(`<li class="stats__result stats__result--wrong"></li>`);
+    }
+  }
+  return arr.join(` `);
+};
+
+
+const currentStatsLayout = createCurrentStats(gameAnswers);
 
 export {answerIcons, currentStatsLayout};

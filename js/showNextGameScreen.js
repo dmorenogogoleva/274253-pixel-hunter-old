@@ -2,18 +2,17 @@ import showScreen from './showScreen';
 import createElement from './createElement';
 import backToGreetingScreen from './backToGreetingScreen';
 import statsLayout from './statsScreen';
-import pickPhotoOrPaintingFromTwoLayoutDom from './pickPhotoOrPaintingFromTwoScreen';
-import pickPhotoOrPaintingLayoutDom from './pickPhotoOrPaintingScreen';
-import pickPaintingFromImagesLayoutDom from './pickPaintingFromImagesScreen';
+import createPickPhotoOrPaintingFromTwo from './pickPhotoOrPaintingFromTwoScreen';
+import createPickPhotoOrPaintingLayoutDom from './pickPhotoOrPaintingScreen';
+import createPickPaintingFromImages from './pickPaintingFromImagesScreen';
 import {gameAnswers} from './gameAnswers';
 import countGamePoints from './countGamePoints';
 
-const showPhotoOrPaintingScreen = () => showScreen(pickPhotoOrPaintingLayoutDom);
-const pickPhotoOrPaintingFromTwoScreen = () => showScreen(pickPhotoOrPaintingFromTwoLayoutDom);
-const pickPaintingFromImagesScreen = () => showScreen(pickPaintingFromImagesLayoutDom);
+const showPhotoOrPaintingScreen = (currentStats) => showScreen(createPickPhotoOrPaintingLayoutDom(currentStats));
+const pickPhotoOrPaintingFromTwoScreen = (currentStats) => showScreen(createPickPhotoOrPaintingFromTwo(currentStats));
+const pickPaintingFromImagesScreen = (currentStats) => showScreen(createPickPaintingFromImages(currentStats));
 
 const gameScreens = [showPhotoOrPaintingScreen, pickPhotoOrPaintingFromTwoScreen, pickPaintingFromImagesScreen];
-
 
 let countOfShowedScreens = 0;
 
@@ -37,6 +36,7 @@ const showNextGameScreen = () => {
     }
     return arr.join(` `);
   };
+
 
   const showStatsScreen = () => {
     const finalAnswers = gameAnswers.slice();
@@ -63,7 +63,7 @@ const showNextGameScreen = () => {
     return showStatsScreen();
   }
 
-  return gameScreens[0]();
+  return gameScreens[0](setAnswersInTable(gameAnswers));
 };
 
 export default showNextGameScreen;
