@@ -34,20 +34,23 @@ const showNextGameScreen = () => {
         arr.push(`<li class="stats__result stats__result--wrong"></li>`);
       }
     }
+
     return arr.join(` `);
   };
 
-  const answersValue = gameAnswers.map((answer) => answer.answer ? 100 : 0);
 
   const showStatsScreen = () => {
     const finalAnswers = gameAnswers.slice();
 
     const setGamePointsInTable = countGamePoints(finalAnswers, 3);
     const setFinalAnswersInTable = setAnswersInTable(finalAnswers);
+    const answersValue = gameAnswers.map((answer) => answer.answer ? 100 : 0);
 
     const statsLayoutDom = createElement(statsLayout(setFinalAnswersInTable, setGamePointsInTable, answersValue));
 
     backToGreetingScreen(statsLayoutDom);
+
+
     return showScreen(statsLayoutDom);
   };
 
