@@ -1,6 +1,6 @@
 import footerLayout from './footerLayout';
 
-const statsLayout = (userAnswers, gamePoints) => `<div id="stats-div" class="stats central__content">
+const statsLayout = (userAnswers, gamePoints, answersPoints) => `<div id="stats-div" class="stats central__content">
     <header class="header">
       <div class="header__back">
         <button class="back">
@@ -10,7 +10,7 @@ const statsLayout = (userAnswers, gamePoints) => `<div id="stats-div" class="sta
       </div>
     </header>
     <div class="result">
-      <h1>Победа!</h1>
+      <h1>${gamePoints !== -1 ? `Победа!` : `Поражение`}</h1>
       <table class="result__table">
         <tr>
           <td class="result__number">1.</td>
@@ -20,7 +20,7 @@ const statsLayout = (userAnswers, gamePoints) => `<div id="stats-div" class="sta
             </ul>
           </td>
           <td class="result__points">×&nbsp;100</td>
-          <td class="result__total"></td>
+          <td class="result__total">${answersPoints.reduce((sum, current) => sum + current)}</td>
         </tr>
         <tr>
           <td></td>
