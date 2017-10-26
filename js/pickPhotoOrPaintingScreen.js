@@ -3,7 +3,7 @@ import createElement from './createElement';
 import showNextGameScreen from './showNextGameScreen';
 import {questions, randomArrayElement, findRandomImage} from './randomQuestion';
 import isItPaintOrPhoto from './isItPaintOrPhoto';
-import backToGreetingScreen from './backToGreetingScreen';
+import {backToGreetingScreen} from './backToGreetingScreen';
 import headerLayout from './headerLayout';
 import footerLayout from './footerLayout';
 import {gameAnswers} from './gameAnswers';
@@ -41,10 +41,10 @@ const createPickPhotoOrPaintingLayoutDom = (currentStats) => {
     ${footerLayout}`;
 
   const pickPhotoOrPaintingLayoutDom = createElement(pickPhotoOrPaintingLayout);
-  const gameAnswersBtns = pickPhotoOrPaintingLayoutDom.querySelectorAll(`.game__answer`);
+  const gameSpans = pickPhotoOrPaintingLayoutDom.querySelectorAll(`.game__span`);
 
-  gameAnswersBtns.forEach(function (btn) {
-    btn.addEventListener(`click`, function () {
+  gameSpans.forEach(function (span) {
+    span.addEventListener(`click`, function () {
       showNextGameScreen();
     });
   });

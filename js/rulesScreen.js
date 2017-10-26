@@ -1,5 +1,5 @@
 import createElement from './createElement';
-import backToGreetingScreen from './backToGreetingScreen';
+import {backToGreetingScreen} from './backToGreetingScreen';
 import showNextGameScreen from './showNextGameScreen';
 import footerLayout from './footerLayout';
 

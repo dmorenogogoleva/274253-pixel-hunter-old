@@ -3,7 +3,7 @@ import createElement from './createElement';
 import showNextGameScreen from './showNextGameScreen';
 import {findRandomRangeNum, questions, randomArrayElement} from './randomQuestion';
 import isItPaintOrPhoto from './isItPaintOrPhoto';
-import backToGreetingScreen from './backToGreetingScreen';
+import {backToGreetingScreen} from './backToGreetingScreen';
 import headerLayout from './headerLayout';
 import footerLayout from './footerLayout';
 import {gameAnswers} from './gameAnswers';

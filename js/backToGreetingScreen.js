@@ -3,6 +3,14 @@ import showScreen from './showScreen';
 import {gameAnswers} from './gameAnswers';
 import rulesLayoutDom from './rulesScreen';
 
+let answersForStats = [];
+
+const addAnswersInList = () => {
+  let currentAnswers = gameAnswers.slice();
+  answersForStats.push(currentAnswers);
+  return answersForStats;
+};
+
 const showGreetingScreen = () => {
   const rulesInput = rulesLayoutDom.querySelector(`.rules__input`);
   rulesInput.value = ``;
@@ -15,4 +23,4 @@ const backToGreetingScreen = (domElement) => {
   btnBack.addEventListener(`click`, showGreetingScreen);
 };
 
-export default backToGreetingScreen;
+export {backToGreetingScreen, addAnswersInList};

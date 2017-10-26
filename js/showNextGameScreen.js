@@ -1,6 +1,6 @@
 import showScreen from './showScreen';
 import createElement from './createElement';
-import backToGreetingScreen from './backToGreetingScreen';
+import {backToGreetingScreen, addAnswersInList} from './backToGreetingScreen';
 import statsLayout from './statsScreen';
 import createPickPhotoOrPaintingFromTwo from './pickPhotoOrPaintingFromTwoScreen';
 import createPickPhotoOrPaintingLayoutDom from './pickPhotoOrPaintingScreen';
@@ -38,18 +38,25 @@ const showNextGameScreen = () => {
     return arr.join(` `);
   };
 
-
   const showStatsScreen = () => {
-    const finalAnswers = gameAnswers.slice();
+    console.log(gameAnswers);
+    console.log(`ОТВЕТЫ`);
+    let newArr = addAnswersInList();
+    console.log(newArr);
+    console.log(`МАССИВ МАССИВОВ ИЗ БЭКСКРИН`);
+    console.log(newArr[0]);
+    console.log(`ОТВЕТЫ НА ПЕРВУЮ ИГРУ`);
+    console.log(newArr[1]);
+    console.log(`ОТВЕТЫ НА ВТОРУЮ ИГРУ`);
+    console.log(newArr[2]);
+    console.log(`ОТВЕТЫ НА ТРЕТЬЮ ИГРУ`);
 
-    const setGamePointsInTable = countGamePoints(finalAnswers, 3);
-    const setFinalAnswersInTable = setAnswersInTable(finalAnswers);
-    const answersValue = gameAnswers.map((answer) => answer.answer ? 100 : 0);
 
+    const setGamePointsInTable = countGamePoints(newArr[0], 3);
+    const setFinalAnswersInTable = setAnswersInTable(newArr[0]);
+    const answersValue = newArr[0].map((answer) => answer.answer ? 100 : 0);
     const statsLayoutDom = createElement(statsLayout(setFinalAnswersInTable, setGamePointsInTable, answersValue));
-
     backToGreetingScreen(statsLayoutDom);
-
 
     return showScreen(statsLayoutDom);
   };
@@ -71,3 +78,4 @@ const showNextGameScreen = () => {
 };
 
 export default showNextGameScreen;
+
