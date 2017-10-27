@@ -1,6 +1,6 @@
 import footerLayout from './footerLayout';
 
-const statsLayout = (userAnswers, gamePoints, answersPoints) => `<div id="stats-div" class="stats central__content">
+const firstGameStatsLayout = (userAnswers, gamePoints, answersPoints) => `<div id="stats-div" class="stats central__content">
     <header class="header">
       <div class="header__back">
         <button class="back">
@@ -49,5 +49,21 @@ const statsLayout = (userAnswers, gamePoints, answersPoints) => `<div id="stats-
       </table>
   ${footerLayout}`;
 
+  const secondGameStatsLayout = (userAnswers) => {`<table class="result__table">
+  <tr>
+    <td class="result__number">2.</td>
+    <td>
+      <ul class="stats">
+      ${userAnswers}
+      </ul>
+    </td>
+    <td class="result__total"></td>
+    <td class="result__total  result__total--final">fail</td>
+  </tr>
+</table>`}
 
-export default statsLayout;
+  const footerGameStatsLayout = () => {
+    `${footerLayout}`;
+  };
+
+export {firstGameStatsLayout,  secondGameStatsLayout, footerGameStatsLayout};
