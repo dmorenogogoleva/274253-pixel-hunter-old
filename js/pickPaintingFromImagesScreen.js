@@ -1,53 +1,67 @@
+import testImages from './testImages';
 import createElement from './createElement';
-import showScreen from './showScreen';
-import statsLayoutDom from './statsScreen';
+import showNextGameScreen from './showNextGameScreen';
+import {findRandomRangeNum} from './randomQuestion';
+import {backToGreetingScreen} from './backToGreetingScreen';
 import headerLayout from './headerLayout';
 import footerLayout from './footerLayout';
-import backToGreetingScreen from './backToGreetingScreen';
+import {gameAnswers} from './gameAnswers';
 
-const pickPaintingFromImagesLayout = `
-${headerLayout}
-<div id="game-3-div" class="game-3 central__content">
-    <div class="game">
-      <p class="game__task">Найдите рисунок среди изображений</p>
-      <form class="game__content  game__content--triple">
-        <div class="game__option">
-          <img src="http://placehold.it/304x455" alt="Option 1" width="304" height="455">
-        </div>
-        <div class="game__option  game__option--selected">
-          <img src="http://placehold.it/304x455" alt="Option 1" width="304" height="455">
-        </div>
-        <div class="game__option">
-          <img src="http://placehold.it/304x455" alt="Option 1" width="304" height="455">
-        </div>
-      </form>
-      <div class="stats">
+const createPickPaintingFromImages = (currentStats) => {
+  const paintingsArr = testImages[0];
+  const photosArr = testImages[1];
+  const photoFirst = photosArr[findRandomRangeNum(0, photosArr.length - 1)];
+  const photoSecond = photosArr[findRandomRangeNum(0, photosArr.length - 1)];
+  const painting = paintingsArr[findRandomRangeNum(0, paintingsArr.length - 1)];
+  const imagesArr = [photoFirst, photoSecond, painting];
+
+  const newImagesArr = imagesArr.slice().sort(() => Math.random() - 0.5);
+
+  const pickPaintingFromImagesLayout = `
+  ${headerLayout}
+  <div id="game-3-div" class="game-3 central__content">
+      <div class="game">
+        <p class="game__task">Найдите рисунок среди изображений</p>
+        <form class="game__content  game__content--triple">
+          <div class="game__option">
+            <img class="game__image" src="${newImagesArr[0]}" alt="Option 1" width="304" height="455">
+          </div>
+          <div class="game__option">
+            <img class="game__image" src="${newImagesArr[1]}" alt="Option 1" width="304" height="455">
+          </div>
+          <div class="game__option">
+            <img class="game__image" src="${newImagesArr[2]}" alt="Option 1" width="304" height="455">
+          </div>
+        </form>
+        <div class="stats">
         <ul class="stats">
-          <li class="stats__result stats__result--wrong"></li>
-          <li class="stats__result stats__result--slow"></li>
-          <li class="stats__result stats__result--fast"></li>
-          <li class="stats__result stats__result--correct"></li>
-          <li class="stats__result stats__result--wrong"></li>
-          <li class="stats__result stats__result--unknown"></li>
-          <li class="stats__result stats__result--slow"></li>
-          <li class="stats__result stats__result--unknown"></li>
-          <li class="stats__result stats__result--fast"></li>
-          <li class="stats__result stats__result--unknown"></li>
+        ${currentStats}
         </ul>
       </div>
+      </div>
     </div>
-  </div>
-  ${footerLayout}`;
+    ${footerLayout}`;
 
-const pickPaintingFromImagesLayoutDom = createElement(pickPaintingFromImagesLayout);
-const showStatsScreen = () => showScreen(statsLayoutDom);
+  const pickPaintingFromImagesLayoutDom = createElement(pickPaintingFromImagesLayout);
 
-const gameOptions = pickPaintingFromImagesLayoutDom.querySelectorAll(`.game__option`);
+  const gameOptions = pickPaintingFromImagesLayoutDom.querySelectorAll(`.game__option`);
 
-gameOptions.forEach(function (btn) {
-  btn.addEventListener(`click`, showStatsScreen);
-});
+  gameOptions.forEach(function (btn) {
+    btn.addEventListener(`click`, function () {
+      const userAnswer = btn.querySelector(`.game__image`).src;
+      const trueAnswer = imagesArr[2];
 
-backToGreetingScreen(pickPaintingFromImagesLayoutDom);
+      let gameAnswer = {};
+      gameAnswer.answer = userAnswer === trueAnswer;
+      gameAnswers.push(gameAnswer);
+      showNextGameScreen();
+    });
+  });
 
-export default pickPaintingFromImagesLayoutDom;
+  backToGreetingScreen(pickPaintingFromImagesLayoutDom);
+
+  return pickPaintingFromImagesLayoutDom;
+};
+
+
+export default createPickPaintingFromImages;

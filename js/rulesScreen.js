@@ -1,8 +1,14 @@
 import createElement from './createElement';
-import showScreen from './showScreen';
-import pickPhotoOrPaintingFromTwoLayoutDom from './pickPhotoOrPaintingFromTwoScreen';
+import {backToGreetingScreen} from './backToGreetingScreen';
+import showNextGameScreen from './showNextGameScreen';
 import footerLayout from './footerLayout';
-import backToGreetingScreen from './backToGreetingScreen';
+
+
+const initialRulesState = {
+  numOfAttempts: 10,
+  numOfSeconds: 30,
+  numOfMistakes: 3
+};
 
 const rulesLayout = `<div id="rules-div" class="rules central__content">
     <header class="header">
@@ -15,12 +21,12 @@ const rulesLayout = `<div id="rules-div" class="rules central__content">
     </header>
     <div class="rules">
       <h1 class="rules__title">Правила</h1>
-      <p class="rules__description">Угадай 10 раз для каждого изображения фото <img
+      <p class="rules__description">Угадай ${initialRulesState.numOfAttempts} раз для каждого изображения фото <img
         src="img/photo_icon.png" width="16" height="16"> или рисунок <img
         src="img/paint_icon.png" width="16" height="16" alt="">.<br>
         Фотографиями или рисунками могут быть оба изображения.<br>
-        На каждую попытку отводится 30 секунд.<br>
-        Ошибиться можно не более 3 раз.<br>
+        На каждую попытку отводится ${initialRulesState.numOfSeconds} секунд.<br>
+        Ошибиться можно не более ${initialRulesState.numOfMistakes} раз.<br>
         <br>
         Готовы?
       </p>
@@ -33,7 +39,6 @@ const rulesLayout = `<div id="rules-div" class="rules central__content">
   ${footerLayout}`;
 
 const rulesLayoutDom = createElement(rulesLayout);
-const showPhotoOrPaintingFromTwoScreen = () => showScreen(pickPhotoOrPaintingFromTwoLayoutDom);
 
 const rulesInput = rulesLayoutDom.querySelector(`.rules__input`);
 const rulesButton = rulesLayoutDom.querySelector(`.rules__button`);
@@ -48,7 +53,7 @@ const rulesInputInputHandler = function () {
 
 rulesInput.addEventListener(`input`, rulesInputInputHandler);
 // попробовала поменять на submit еще раз, форма не отправляется, страница перезагружается и всё(
-rulesButton.addEventListener(`click`, showPhotoOrPaintingFromTwoScreen);
+rulesButton.addEventListener(`click`, showNextGameScreen);
 
 backToGreetingScreen(rulesLayoutDom);
 

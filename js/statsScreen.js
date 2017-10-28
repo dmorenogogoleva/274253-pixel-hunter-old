@@ -1,8 +1,4 @@
-import createElement from './createElement';
-import footerLayout from './footerLayout';
-import backToGreetingScreen from './backToGreetingScreen';
-
-const statsLayout = `<div id="stats-div" class="stats central__content">
+const firstGameStatsLayout = (userAnswers, gamePoints, answersPoints) => `<div id="stats-div" class="stats central__content">
     <header class="header">
       <div class="header__back">
         <button class="back">
@@ -12,110 +8,56 @@ const statsLayout = `<div id="stats-div" class="stats central__content">
       </div>
     </header>
     <div class="result">
-      <h1>Победа!</h1>
+      <h1>${gamePoints !== -1 ? `Победа!` : `Поражение`}</h1>
       <table class="result__table">
         <tr>
           <td class="result__number">1.</td>
           <td colspan="2">
             <ul class="stats">
-              <li class="stats__result stats__result--wrong"></li>
-              <li class="stats__result stats__result--slow"></li>
-              <li class="stats__result stats__result--fast"></li>
-              <li class="stats__result stats__result--correct"></li>
-              <li class="stats__result stats__result--wrong"></li>
-              <li class="stats__result stats__result--unknown"></li>
-              <li class="stats__result stats__result--slow"></li>
-              <li class="stats__result stats__result--unknown"></li>
-              <li class="stats__result stats__result--fast"></li>
-              <li class="stats__result stats__result--unknown"></li>
+              ${userAnswers}
             </ul>
           </td>
           <td class="result__points">×&nbsp;100</td>
-          <td class="result__total">900</td>
+          <td class="result__total">${answersPoints.reduce((sum, current) => sum + current)}</td>
         </tr>
         <tr>
           <td></td>
           <td class="result__extra">Бонус за скорость:</td>
           <td class="result__extra">1&nbsp;<span class="stats__result stats__result--fast"></span></td>
           <td class="result__points">×&nbsp;50</td>
-          <td class="result__total">50</td>
+          <td class="result__total"></td>
         </tr>
         <tr>
           <td></td>
           <td class="result__extra">Бонус за жизни:</td>
-          <td class="result__extra">2&nbsp;<span class="stats__result stats__result--alive"></span></td>
+          <td class="result__extra">3&nbsp;<span class="stats__result stats__result--alive"></span></td>
           <td class="result__points">×&nbsp;50</td>
-          <td class="result__total">100</td>
+          <td class="result__total">150</td>
         </tr>
         <tr>
           <td></td>
           <td class="result__extra">Штраф за медлительность:</td>
           <td class="result__extra">2&nbsp;<span class="stats__result stats__result--slow"></span></td>
           <td class="result__points">×&nbsp;50</td>
-          <td class="result__total">-100</td>
-        </tr>
-        <tr>
-          <td colspan="5" class="result__total  result__total--final">950</td>
-        </tr>
-      </table>
-      <table class="result__table">
-        <tr>
-          <td class="result__number">2.</td>
-          <td>
-            <ul class="stats">
-              <li class="stats__result stats__result--wrong"></li>
-              <li class="stats__result stats__result--slow"></li>
-              <li class="stats__result stats__result--fast"></li>
-              <li class="stats__result stats__result--correct"></li>
-              <li class="stats__result stats__result--wrong"></li>
-              <li class="stats__result stats__result--unknown"></li>
-              <li class="stats__result stats__result--slow"></li>
-              <li class="stats__result stats__result--wrong"></li>
-              <li class="stats__result stats__result--fast"></li>
-              <li class="stats__result stats__result--wrong"></li>
-            </ul>
-          </td>
           <td class="result__total"></td>
-          <td class="result__total  result__total--final">fail</td>
-        </tr>
-      </table>
-      <table class="result__table">
-        <tr>
-          <td class="result__number">3.</td>
-          <td colspan="2">
-            <ul class="stats">
-              <li class="stats__result stats__result--wrong"></li>
-              <li class="stats__result stats__result--slow"></li>
-              <li class="stats__result stats__result--fast"></li>
-              <li class="stats__result stats__result--correct"></li>
-              <li class="stats__result stats__result--wrong"></li>
-              <li class="stats__result stats__result--unknown"></li>
-              <li class="stats__result stats__result--slow"></li>
-              <li class="stats__result stats__result--unknown"></li>
-              <li class="stats__result stats__result--fast"></li>
-              <li class="stats__result stats__result--unknown"></li>
-            </ul>
-          </td>
-          <td class="result__points">×&nbsp;100</td>
-          <td class="result__total">900</td>
         </tr>
         <tr>
-          <td></td>
-          <td class="result__extra">Бонус за жизни:</td>
-          <td class="result__extra">2&nbsp;<span class="stats__result stats__result--alive"></span></td>
-          <td class="result__points">×&nbsp;50</td>
-          <td class="result__total">100</td>
+          <td colspan="5" class="result__total  result__total--final">${gamePoints}</td>
         </tr>
-        <tr>
-          <td colspan="5" class="result__total  result__total--final">950</td>
-        </tr>
-      </table>
-  </div>
-  </div>
-  ${footerLayout}`;
+      </table>`;
 
-const statsLayoutDom = createElement(statsLayout);
+const secondGameStatsLayout = (numberOfGame, userAnswers, gamePoints, answersPoints) => `<table class="result__table">
+<tr>
+  <td class="result__number">${numberOfGame}</td>
+  <td>
+    <ul class="stats">
+    ${userAnswers}
+    </ul>
+  </td>
+  <td class="result__total">${answersPoints.reduce((sum, current) => sum + current)}</td>
+  <td class="result__total  result__total--final">${gamePoints !== -1 ? `Победа!` : `Поражение`}</td>
+</tr>
+</table>`;
 
-backToGreetingScreen(statsLayoutDom);
 
-export default statsLayoutDom;
+export {firstGameStatsLayout, secondGameStatsLayout};

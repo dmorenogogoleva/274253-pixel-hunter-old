@@ -1,55 +1,77 @@
+import testImages from './testImages';
 import createElement from './createElement';
-import showScreen from './showScreen';
-import pickPaintingFromImagesLayoutDom from './pickPaintingFromImagesScreen';
+import showNextGameScreen from './showNextGameScreen';
+import {questions, randomArrayElement, findRandomImage} from './randomQuestion';
+import isItPaintOrPhoto from './isItPaintOrPhoto';
+import {backToGreetingScreen} from './backToGreetingScreen';
 import headerLayout from './headerLayout';
 import footerLayout from './footerLayout';
-import backToGreetingScreen from './backToGreetingScreen';
+import {gameAnswers} from './gameAnswers';
 
-const pickPhotoOrPaintingLayout = `
-${headerLayout}
-<div id="game-2-div" class="game-2 central__content">
-  <div class="game">
-    <p class="game__task">Угадай, фото или рисунок?</p>
-    <form class="game__content  game__content--wide">
-      <div class="game__option">
-        <img src="http://placehold.it/705x455" alt="Option 1" width="705" height="455">
-        <label class="game__answer  game__answer--photo">
-          <input name="question1" type="radio" value="photo">
-          <span>Фото</span>
-        </label>
-        <label class="game__answer  game__answer--wide  game__answer--paint">
-          <input name="question1" type="radio" value="paint">
-          <span>Рисунок</span>
-        </label>
-      </div>
-    </form>
-    <div class="stats">
+
+const createPickPhotoOrPaintingLayoutDom = (currentStats) => {
+
+  const randomArr = randomArrayElement(testImages);
+
+  const pickPhotoOrPaintingLayout = `
+  ${headerLayout}
+  <div id="game-2-div" class="game-2 central__content">
+    <div class="game">
+      <p class="game__task">${randomArrayElement(questions)}</p>
+      <form class="game__content  game__content--wide">
+        <div class="game__option">
+          <img src="${findRandomImage(randomArr, testImages)}" alt="Option 1" width="705" height="455">
+          <label class="game__answer  game__answer--photo">
+            <input name="question1" type="radio" value="photo">
+            <span class="game__span game__span--photo photo">Фото</span>
+          </label>
+          <label class="game__answer  game__answer--wide  game__answer--paint">
+            <input name="question1" type="radio" value="paint">
+            <span class="game__span game__span--paint paint">Рисунок</span>
+          </label>
+        </div>
+      </form>
+      <div class="stats">
       <ul class="stats">
-        <li class="stats__result stats__result--wrong"></li>
-        <li class="stats__result stats__result--slow"></li>
-        <li class="stats__result stats__result--fast"></li>
-        <li class="stats__result stats__result--correct"></li>
-        <li class="stats__result stats__result--wrong"></li>
-        <li class="stats__result stats__result--unknown"></li>
-        <li class="stats__result stats__result--slow"></li>
-        <li class="stats__result stats__result--unknown"></li>
-        <li class="stats__result stats__result--fast"></li>
-        <li class="stats__result stats__result--unknown"></li>
+      ${currentStats}
       </ul>
     </div>
+    </div>
   </div>
-</div>
-  ${footerLayout}`;
+    ${footerLayout}`;
 
-const pickPhotoOrPaintingLayoutDom = createElement(pickPhotoOrPaintingLayout);
-const pickPaintingFromImagesScreen = () => showScreen(pickPaintingFromImagesLayoutDom);
+  const pickPhotoOrPaintingLayoutDom = createElement(pickPhotoOrPaintingLayout);
+  const gameSpans = pickPhotoOrPaintingLayoutDom.querySelectorAll(`.game__span`);
 
-const gameAnswers = pickPhotoOrPaintingLayoutDom.querySelectorAll(`.game__answer`);
+  gameSpans.forEach(function (span) {
+    span.addEventListener(`click`, function () {
+      showNextGameScreen();
+    });
+  });
 
-gameAnswers.forEach(function (btn) {
-  btn.addEventListener(`click`, pickPaintingFromImagesScreen);
-});
+  const gameAnswerPhotoBtn = pickPhotoOrPaintingLayoutDom.querySelector(`.game__span--photo`);
+  const gameAnswerPaintBtn = pickPhotoOrPaintingLayoutDom.querySelector(`.game__span--paint`);
 
-backToGreetingScreen(pickPhotoOrPaintingLayoutDom);
+  gameAnswerPhotoBtn.addEventListener(`click`, function () {
+    const userAnswer = isItPaintOrPhoto(gameAnswerPhotoBtn);
+    const trueAnswer = (testImages.indexOf(randomArr) === 0) ? `paint` : `photo`;
+    let gameAnswer = {};
+    gameAnswer.answer = userAnswer === trueAnswer;
+    gameAnswers.push(gameAnswer);
+  });
 
-export default pickPhotoOrPaintingLayoutDom;
+  gameAnswerPaintBtn.addEventListener(`click`, function () {
+    const userAnswer = isItPaintOrPhoto(gameAnswerPaintBtn);
+    const trueAnswer = (testImages.indexOf(randomArr) === 0) ? `paint` : `photo`;
+    let gameAnswer = {};
+    gameAnswer.answer = userAnswer === trueAnswer;
+    gameAnswers.push(gameAnswer);
+  });
+
+  backToGreetingScreen(pickPhotoOrPaintingLayoutDom);
+
+  return pickPhotoOrPaintingLayoutDom;
+};
+
+
+export default createPickPhotoOrPaintingLayoutDom;
