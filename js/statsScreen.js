@@ -1,5 +1,3 @@
-import footerLayout from './footerLayout';
-
 const firstGameStatsLayout = (userAnswers, gamePoints, answersPoints) => `<div id="stats-div" class="stats central__content">
     <header class="header">
       <div class="header__back">
@@ -46,24 +44,20 @@ const firstGameStatsLayout = (userAnswers, gamePoints, answersPoints) => `<div i
         <tr>
           <td colspan="5" class="result__total  result__total--final">${gamePoints}</td>
         </tr>
-      </table>
-  ${footerLayout}`;
+      </table>`;
 
-  const secondGameStatsLayout = (userAnswers) => {`<table class="result__table">
-  <tr>
-    <td class="result__number">2.</td>
-    <td>
-      <ul class="stats">
-      ${userAnswers}
-      </ul>
-    </td>
-    <td class="result__total"></td>
-    <td class="result__total  result__total--final">fail</td>
-  </tr>
-</table>`}
+const secondGameStatsLayout = (numberOfGame, userAnswers, gamePoints, answersPoints) => `<table class="result__table">
+<tr>
+  <td class="result__number">${numberOfGame}</td>
+  <td>
+    <ul class="stats">
+    ${userAnswers}
+    </ul>
+  </td>
+  <td class="result__total">${answersPoints.reduce((sum, current) => sum + current)}</td>
+  <td class="result__total  result__total--final">${gamePoints !== -1 ? `Победа!` : `Поражение`}</td>
+</tr>
+</table>`;
 
-  const footerGameStatsLayout = () => {
-    `${footerLayout}`;
-  };
 
-export {firstGameStatsLayout,  secondGameStatsLayout, footerGameStatsLayout};
+export {firstGameStatsLayout, secondGameStatsLayout};

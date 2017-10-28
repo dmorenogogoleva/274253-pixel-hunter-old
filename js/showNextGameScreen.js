@@ -1,12 +1,13 @@
 import showScreen from './showScreen';
 import createElement from './createElement';
 import {backToGreetingScreen, addAnswersInList} from './backToGreetingScreen';
-import {firstGameStatsLayout, secondGameStatsLayout, footerGameStatsLayout} from './statsScreen';
+import {firstGameStatsLayout, secondGameStatsLayout} from './statsScreen';
 import createPickPhotoOrPaintingFromTwo from './pickPhotoOrPaintingFromTwoScreen';
 import createPickPhotoOrPaintingLayoutDom from './pickPhotoOrPaintingScreen';
 import createPickPaintingFromImages from './pickPaintingFromImagesScreen';
 import {gameAnswers} from './gameAnswers';
 import countGamePoints from './countGamePoints';
+import footerLayout from './footerLayout';
 
 const showPhotoOrPaintingScreen = (currentStats) => showScreen(createPickPhotoOrPaintingLayoutDom(currentStats));
 const pickPhotoOrPaintingFromTwoScreen = (currentStats) => showScreen(createPickPhotoOrPaintingFromTwo(currentStats));
@@ -39,51 +40,44 @@ const showNextGameScreen = () => {
   };
 
   const renderStatsScreen = () => {
-    console.log(gameAnswers);
-    console.log(`ОТВЕТЫ`);
     let newArr = addAnswersInList();
-    console.log(newArr);
-    console.log(`МАССИВ МАССИВОВ ИЗ БЭКСКРИН`);
-    console.log(newArr[0]);
-    console.log(`ОТВЕТЫ НА ПЕРВУЮ ИГРУ`);
-    console.log(newArr[1]);
-    console.log(`ОТВЕТЫ НА ВТОРУЮ ИГРУ`);
-    console.log(newArr[2]);
-    console.log(`ОТВЕТЫ НА ТРЕТЬЮ ИГРУ`);
 
     const central = document.querySelector(`.central`);
 
-    const showStatsScreen = function (footer, domElement, domElement1, domElement2) {
+    const showStatsScreen = function (footer, statsLayoutDomArray) {
       central.innerHTML = ``;
-      central.appendChild(domElement);
-      central.appendChild(domElement1);
-      // central.appendChild(domElement2);
+
+      for (let domElement of statsLayoutDomArray) {
+        central.appendChild(domElement);
+      }
       central.appendChild(footer);
     };
 
-    const setGamePointsInTable0 = countGamePoints(newArr[0], 3);
-    const setFinalAnswersInTable0 = setAnswersInTable(newArr[0]);
-    const answersValue0 = newArr[0].map((answer) => answer.answer ? 100 : 0);
-    const statsLayoutDom0 = createElement(firstGameStatsLayout(setFinalAnswersInTable0, setGamePointsInTable0, answersValue0));
-    backToGreetingScreen(statsLayoutDom0);
 
+    const createArrayOfStatsElementsLayout = (arr) => {
+      let arrayOfStatsElementsLayout = [];
+      const setFirstGameFinalAnswersInFTable = setAnswersInTable(arr[0]);
+      const setFirstGamePointsInTable = countGamePoints(arr[0], 3);
+      const firstGameAnswersValue = arr[0].map((answer) => answer.answer ? 100 : 0);
+      const firstGameStatsLayoutDom = createElement(firstGameStatsLayout(setFirstGameFinalAnswersInFTable, setFirstGamePointsInTable, firstGameAnswersValue));
+      backToGreetingScreen(firstGameStatsLayoutDom);
 
-    const setGamePointsInTable1 = countGamePoints(newArr[1], 3);
-    const setFinalAnswersInTable1 = setAnswersInTable(newArr[1]);
-    const answersValue1 = newArr[1].map((answer) => answer.answer ? 100 : 0);
-    const statsLayoutDom1 = createElement(secondGameStatsLayout(setFinalAnswersInTable1));
+      arrayOfStatsElementsLayout.push(firstGameStatsLayoutDom);
 
+      for (let i = 1; i < arr.length; i++) {
+        let numberOfGame = i + 1;
 
-    // const setGamePointsInTable2 = countGamePoints(newArr[2], 3);
-    // const setFinalAnswersInTable2 = setAnswersInTable(newArr[2]);
-    // const answersValue2 = newArr[2].map((answer) => answer.answer ? 100 : 0);
-    // const statsLayoutDom2 = createElement(secondGameStatsLayout(setFinalAnswersInTable2, setGamePointsInTable2, answersValue2));
+        const setRestGamesFinalAnswersInTable = setAnswersInTable(arr[i]);
+        const setRestGamesPointsInTable = countGamePoints(arr[i], 3);
+        const restGamesAnswersValue = arr[i].map((answer) => answer.answer ? 100 : 0);
+        const restGamesStatsLayoutDom = createElement(secondGameStatsLayout(numberOfGame, setRestGamesFinalAnswersInTable, setRestGamesPointsInTable, restGamesAnswersValue));
 
-    console.log(statsLayoutDom0);
-    console.log(statsLayoutDom1);
+        arrayOfStatsElementsLayout.push(restGamesStatsLayoutDom);
+      }
 
-
-    return showStatsScreen(footerGameStatsLayout, statsLayoutDom0, statsLayoutDom1);
+      return arrayOfStatsElementsLayout;
+    };
+    return showStatsScreen(createElement(footerLayout), createArrayOfStatsElementsLayout(newArr));
   };
 
   for (const answer of gameAnswers) {
