@@ -1,19 +1,13 @@
-import createElement from './createElement';
-import showScreen from './showScreen';
-import greetingLayoutDom from './greetingScreen';
+import IntroScreenView from './IntroScreenView';
 
-const introScreen = `<div id="main" class="central__content">
-<div id="intro" class="intro">
-  <h1 class="intro__asterisk">*</h1>
-  <p class="intro__motto"><sup>*</sup> Это не фото. Это рисунок маслом нидерландского художника-фотореалиста Tjalf Sparnaay.</p>
-</div>
-</div>`;
+class IntroScreen {
+  constructor() {
+    this.view = new IntroScreenView();
+  }
 
-const introLayoutDom = createElement(introScreen);
-const showGreetingScreen = () => showScreen(greetingLayoutDom);
+  init() {
+    this.view.show();
+  }
+}
 
-const asterisk = introLayoutDom.querySelector(`.intro__asterisk`);
-asterisk.addEventListener(`click`, showGreetingScreen);
-
-export default introLayoutDom;
-
+export default new IntroScreen();

@@ -1,6 +1,3 @@
-import introLayoutDom from './introScreen';
-import showScreen from './showScreen';
+import Application from './application';
 
-window.onload = function () {
-  showScreen(introLayoutDom);
-};
+Application.startGame();
