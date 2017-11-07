@@ -1,5 +1,5 @@
-import AbstractView from './AbstractView';
-import {createElement, showScreen} from './util';
+import AbstractView from '../../AbstractView';
+import {createElement, showScreen} from '../../util';
 
 export default class IntroScreenView extends AbstractView {
 

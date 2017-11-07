@@ -1,4 +1,4 @@
-import IntroScreen from './IntroScreen';
+import IntroScreen from './screens/intro-screen/IntroScreen';
 
 class Application {
 

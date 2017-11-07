@@ -10,3 +10,7 @@ export const showScreen = function (domElement) {
   central.innerHTML = ``;
   central.appendChild(domElement);
 };
+
+export const findRandomRangeNum = function (min, max) {
+  return Math.round(Math.random() * (max - min) + min);
+};
